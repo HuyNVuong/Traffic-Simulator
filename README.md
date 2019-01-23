@@ -1,1 +1,1 @@
-## CSCE_361 - City Traffic Simulator
+## CSCE 361 - City Traffic Simulator
