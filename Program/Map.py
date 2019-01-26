@@ -1,7 +1,6 @@
 from appJar import gui
 from Raw import raw_map
 
-
 # Map class to create a map simulation, map inherit method from GUI class from appJar
 # Map __init__ got re-implement to generate a road map right when we initilize a new map
 class Map(gui):
