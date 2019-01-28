@@ -12,7 +12,8 @@ class Map(gui):
             for x in range(len(raw_map[y])):
                 if (raw_map[y][x] == 3):
                     wall.create_oval(x * 28, y * 29, 20 + x * 28, 20 + y * 29, outline="blue")
-        wall.create_oval(365, 490, 395, 520, fill="yellow")
+                elif(raw_map[y][x] == 2):
+                    wall.create_rectangle(x * 28, y * 29, 30 + x * 28, 15 + y * 29, fill="yellow")
     
 if __name__ == "__main__":   
     map = Map()
