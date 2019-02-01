@@ -20,7 +20,7 @@ class Map(gui):
                     wall.create_rectangle(x * 28 + 15, y * 29 + 5, 23 + x * 28, 10 + y * 29, fill="black")
                     wall.create_rectangle(x * 28, y * 29, 4 + x * 28, 7 + y * 29, fill="red")
                     wall.create_rectangle(x * 28, y * 29 + 8, 4 + x * 28, 15 + y * 29, fill="red")
-                    # 4 wells
+                    # 4 wheels
                     wall.create_rectangle(x * 28 + 7, y * 29 - 2, 12 + x * 28, 1 + y * 29, fill="black")
                     wall.create_rectangle(x * 28 + 22, y * 29 - 2, 27 + x * 28, 1 + y * 29, fill="black")
                     wall.create_rectangle(x * 28 + 7, y * 29 + 14, 12 + x * 28, 17 + y * 29, fill="black")
