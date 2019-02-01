@@ -16,6 +16,11 @@ git fetch
 ```
 git push -u origin new_branch
 ```
+* To merge a branch :
+```
+git checkout master
+git merge branch_to_merge
+git branch -d branch_to_merge
 
 ## Traffic presentation
 ![alt text](img/roadMap_ver1.0.PNG)
