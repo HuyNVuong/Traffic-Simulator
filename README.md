@@ -18,4 +18,4 @@ git push -u origin new_branch
 ```
 
 ## Traffic presentation
-> <img src="https://git.unl.edu/vuongnguyenhuy/csce_361/blob/master/img/roadMap_ver1.0.PNG" align="middle">
+![alt text](img/roadMap_ver1.0.PNG)
