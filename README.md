@@ -24,4 +24,4 @@ git branch -d branch_to_merge
 ```
 
 ## Traffic presentation
-![alt text](img/roadMap_ver1.0.PNG)
+![alt text](img/roadMap_ver2.0.PNG)

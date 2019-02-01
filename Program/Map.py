@@ -1,5 +1,5 @@
 from appJar import gui
-from Raw import raw_map
+from Raw import raw_map, Unit
 
 # Map class to create a map simulation, map inherit method from GUI class from appJar
 # Map __init__ got re-implement to generate a road map right when we initilize a new map
@@ -8,14 +8,13 @@ class Map(gui):
         super().__init__("Traffic Simulator", "790x830")
         self.setBg("#ffe4b5")
         canvas = self.addCanvas("canvas")
-        # cars = self.addCanvas("car")
         for y in range(len(raw_map)):
             for x in range(len(raw_map[y])):
-                if (raw_map[y][x] == 3):    
+                if (raw_map[y][x] == Unit.wall):    
                     canvas.create_oval(x * 28, y * 29, 20 + x * 28, 20 + y * 29, outline="black", fill="#808080")
-                elif(raw_map[y][x] == 1):
+                elif(raw_map[y][x] == Unit.vertical_car):
                     self.draw_car_vertical(canvas, x, y)
-                elif(raw_map[y][x] == 2):
+                elif(raw_map[y][x] == Unit.horizontal_car):
                     self.draw_car_horizontal(canvas, x, y)
                 else:
                     self.draw_dot(canvas, x, y)
@@ -49,6 +48,7 @@ class Map(gui):
     def draw_dot(self, canvas, x, y):
         canvas.create_rectangle(x * 28 + 12, y * 29 + 12, x * 28 + 16, y * 29 + 16, fill="#fff")
 
+# Testing purpose
 if __name__ == "__main__":   
     map = Map()
     map.go()

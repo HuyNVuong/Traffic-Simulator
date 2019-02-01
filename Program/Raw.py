@@ -1,8 +1,15 @@
+from enum import IntEnum
 # 3 : Walls
 # Cars :  boolean state
 # 1 : vertical
 # 2 : horizontal
 # 0 : Open roads
+
+class Unit(IntEnum):
+    open_road = 0
+    vertical_car = 1
+    horizontal_car = 2
+    wall = 3
 
 raw_map =  [[3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3],
             [3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3],
