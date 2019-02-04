@@ -1,4 +1,6 @@
 from appJar import gui
+from typing import List
+from Car import Car
 from Raw import raw_map, Unit
 
 # Map class to create a map simulation, map inherit method from GUI class from appJar
@@ -16,8 +18,8 @@ class Map(gui):
                     self.draw_car_vertical(canvas, x, y)
                 elif(raw_map[y][x] == Unit.horizontal_car):
                     self.draw_car_horizontal(canvas, x, y)
-                else:
-                    self.draw_dot(canvas, x, y)
+                # else:
+                #     self.draw_dot(canvas, x, y)
     
     def draw_car_horizontal(self, canvas, x , y):
         # Car body
@@ -47,6 +49,17 @@ class Map(gui):
 
     def draw_dot(self, canvas, x, y):
         canvas.create_rectangle(x * 28 + 12, y * 29 + 12, x * 28 + 16, y * 29 + 16, fill="#fff")
+
+    def add_car(self, x, y, car):
+        raw_map[y][x] = car.state
+
+    def open_spot(self):
+        open_spot = []
+        for y, row in enumerate(raw_map):
+            for x, spot in enumerate(row):
+                if spot == 0:
+                    open_spot.append((y, x))
+        return open_spot
 
 # Testing purpose
 if __name__ == "__main__":   
