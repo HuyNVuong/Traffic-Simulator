@@ -1,8 +1,9 @@
+from Raw import Point
 
 class Car:
-    def __init__(self, x, y, dx, dy, state):
-        self.x = x
-        self.y = y 
+    def __init__(self, coordinate : Point, dx, dy, state):
+        self.x = coordinate.x
+        self.y = coordinate.y
         self.dx = dx
         self.dy = dy 
         self.state = state

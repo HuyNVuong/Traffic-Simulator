@@ -1,9 +1,14 @@
 from enum import IntEnum
+from typing import NamedTuple
 # 3 : Walls
 # Cars :  boolean state
 # 1 : vertical
 # 2 : horizontal
 # 0 : Open roads
+
+class Point(NamedTuple):
+    x : int
+    y : int
 
 class Unit(IntEnum):
     open_road = 0
