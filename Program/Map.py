@@ -1,7 +1,7 @@
 from appJar import gui
 from typing import List
 from Car import Car
-from Raw import raw_map, Unit, Point
+from Raw import raw_map, Unit, Point, Turn
 
 # Map class to create a map simulation, map inherit method from GUI class from appJar
 # Map __init__ got re-implement to generate a road map right when we initilize a new map
@@ -14,9 +14,9 @@ class Map(gui):
             for x in range(len(raw_map[y])):
                 if (raw_map[y][x] == Unit.wall):    
                     canvas.create_oval(x * 28, y * 29, 20 + x * 28, 20 + y * 29, outline="black", fill="#808080")
-                elif(raw_map[y][x] == Unit.vertical_car):
+                elif(raw_map[y][x] == Turn.up):
                     self.draw_car_vertical(canvas, x, y)
-                elif(raw_map[y][x] == Unit.horizontal_car):
+                elif(raw_map[y][x] == Turn.left):
                     self.draw_car_horizontal(canvas, x, y)
                 # else:
                 #     self.draw_dot(canvas, x, y)
