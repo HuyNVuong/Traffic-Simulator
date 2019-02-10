@@ -6,8 +6,8 @@ from Car import Car
 
 if __name__ == "__main__":   
     map = Map()
-    car = Car(Point(6, 16), 0, 1)
-    map.add_car(car)
+    map.add_car(Car(Point(6, 16), 3))
+    map.add_car(Car(Point(26, 27), 4))
+    map.paint()
     map.go()
-    
     
