@@ -38,7 +38,7 @@ git branch -d branch_to_merge
 	- Display  : (\*.png).
 	- Editable : (\*.xml).
 * Target platform : Web Application / Application.
-* Implementation language : Python, Django, HTML, XML, UML.
+* Implementation language : Python, Django (maybe), HTML, XML, UML.
 
 ## Traffic presentation
 ![alt text](Images/roadMap_ver3.0.png)
