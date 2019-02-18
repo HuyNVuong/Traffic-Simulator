@@ -37,8 +37,8 @@ git branch -d branch_to_merge
 * Tools : [draw.io](draw.io).
 	- Display  : (\*.png).
 	- Editable : (\*.xml).
-* Target platform : Application.
-* Implementation language : Python, HTML, XML, UML.
+* Target platform : Web Application / Application.
+* Implementation language : Python, Django, HTML, XML, UML.
 
 ## Traffic presentation
 ![alt text](Images/roadMap_ver2.1.PNG)
