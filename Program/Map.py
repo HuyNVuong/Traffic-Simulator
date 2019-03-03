@@ -37,7 +37,6 @@ class Map(Frame):
                     car = Car(Point(x, y), raw_map[y][x])
                     self.cars.append(car)
 
-
     def say_hi(self):
         print("hi there, everyone!")
         

@@ -9,8 +9,7 @@ class CommandPallete(Frame):
         self.master = master
         self.start_time = time()
         self.pack(side=TOP)
-        self.start = False
-        self.pause = False
+        self.running = False
         self.create_widgets()
         
     def create_widgets(self):
@@ -49,14 +48,15 @@ class CommandPallete(Frame):
         # self.quit.pack(side="right")
 
     def start(self):
-        self.start = True
+        self.running = True
         print("Starting project...")
 
     def pause(self):
-        self.pause = True 
+        self.running = False
         print("Paused.")
 
     def stop(self):
+        self.running = False
         print("Stopped.")
 
     def step(self):
