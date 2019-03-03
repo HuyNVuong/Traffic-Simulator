@@ -1,38 +1,46 @@
-from appJar import gui
+from tkinter import *
 from typing import List
 from Car import Car
-from Raw import raw_map, Unit, Point, Turn
+from Raw import *
 from ActionListener import actionListenter
 
 # Map class to create a map simulation, map inherit method from GUI class from appJar
 # Map __init__ got re-implement to generate a road map right when we initilize a new map
-class Map(gui):
-    
-    def __init__(self):
-        super().__init__("Traffic Simulator", "790x830")
-        self.setBg("#ffe4b5")
-        # self.setSticky("nw")
-        commandCenter = self.addCanvas("commandCenter", 0, 0, 5, 1)
-        # self.addLabel("CarNum", "Number of cars", 0, 0)
-        # self.addLabel("TimeElapsed", "Time Elapsed: ", 0, 1)
-        # self.addButton("Start", actionListenter(), 1, 0)
-        # self.addButton("Stop", actionListenter(), 1, 1)
-        # self.addButton("Reset", actionListenter(), 1, 2)
-        self.map = self.addCanvas("map", 1, 0, 5, 5)
+
+
+class Map(Frame):
+    def __init__(self, master=None):
+        super().__init__(master)
+        self.master = master 
+        self.pack(side=BOTTOM)
+        self.create_widgets()
         
-        # self.setSticky("both")
+    cars = []
+
+    def create_widgets(self):
+        self.map = Canvas(self, width=780, height=860)
+        self.paint()
+        self.cars = []
+        self.map.pack()
+    
     def paint(self):
         for y in range(len(raw_map)):
             for x in range(len(raw_map[y])):
-                if (raw_map[y][x] == Unit.wall):    
+                if (raw_map[y][x] == Tiles.wall):    
                     self.draw_block(x, y)
-                elif(raw_map[y][x] == Turn.up):
+                elif(raw_map[y][x] == Tiles.car_up or raw_map[y][x] == Tiles.car_down):
                     self.draw_car_vertical(x, y)
-                elif(raw_map[y][x] == Turn.left):
+                    car = Car(Point(x, y), raw_map[y][x])
+                    self.cars.append(car)
+                elif(raw_map[y][x] == Tiles.car_left or raw_map[y][x] == Tiles.car_right):
                     self.draw_car_horizontal(x, y)
-                # else:
-                #     self.draw_dot(canvas, x, y)
+                    car = Car(Point(x, y), raw_map[y][x])
+                    self.cars.append(car)
 
+
+    def say_hi(self):
+        print("hi there, everyone!")
+        
     def draw_block(self, x, y):
         self.map.create_rectangle(x * 28, y * 29, 20 + x * 28, 20 + y * 29, outline="black", fill="#808080")
         # self.draw_dot(x, y)
@@ -71,7 +79,7 @@ class Map(gui):
         raw_map[y][x] = car.state
 
     def open_spot(self):
-        open_spot : List[Point]
+        open_spot = []
         for y, row in enumerate(raw_map):
             for x, spot in enumerate(row):
                 if spot == 0:
@@ -80,5 +88,5 @@ class Map(gui):
 
 # Testing purpose
 if __name__ == "__main__":   
-    map = Map()
-    map.go()
+    root = Tk()
+    
