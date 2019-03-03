@@ -1,13 +1,16 @@
 # Main driver that executes the program
 
 from Map import Map
-from Raw import Point, Unit, Turn
+from Raw import *
 from Car import Car
+from CommandPallete import CommandPallete
+from tkinter import Tk
 
 if __name__ == "__main__":   
-    map = Map()
-    map.add_car(Car(Point(6, 16), 3))
-    map.add_car(Car(Point(26, 27), 4))
-    map.paint()
-    map.go()
-    
+    root = Tk()
+    root.title("Traffic Simulator")
+    command = CommandPallete(master=root)
+    trafficMap = Map(master=root)
+    # while command.pause is not True:
+    #     root.update()
+    root.mainloop()
