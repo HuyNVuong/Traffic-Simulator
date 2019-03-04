@@ -12,7 +12,7 @@ if __name__ == "__main__":
     root.title("Traffic Simulator")
     command = CommandPallete(master=root)
     trafficMap = Map(master=root)
-    while command.running is not True:
+    while command.running is True:
         print('moving')
         for car in trafficMap.cars:
             raw_map[car.y][car.x] = Tiles.open_road_down
