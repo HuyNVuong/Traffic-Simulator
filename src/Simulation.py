@@ -4,10 +4,25 @@ from Map import Map
 from Raw import *
 from Car import Car
 from CommandPallete import CommandPallete
-from tkinter import Tk
+from tkinter import *
 from time import sleep
 
-if __name__ == "__main__":   
+if __name__ == "__main__":  
+
+    # Opening window
+    start_window = Tk()
+    start_frame = Frame(start_window)
+    start_frame.pack()
+    start_label = Label(start_frame, text="MAYOR ONLY")
+    start_label.pack()
+    start_button = Button(start_frame, fg="red", command=start_window.destroy)
+    start_button["text"] = "Open Simulation"
+    start_button.pack()
+    start_window.mainloop() 
+    # End of opening window
+
+
+
     root = Tk()
     root.title("Traffic Simulator")
     command = CommandPallete(master=root)
