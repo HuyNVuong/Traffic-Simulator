@@ -29,16 +29,24 @@ git checkout master
 git merge branch_to_merge
 git branch -d branch_to_merge
 ```
-## Increment 1 : Analysis 
-* An inital version of RAD is attached in Requirements directory.
+## Milestone
+### Increment 1 : Analysis 
+* An initial version of RAD is attached in Requirements directory.
 
-## Increment 2 : Object oriented Analysis and UML
-* A inital version of Class and sequence digram.
+### Increment 2 : Object oriented Analysis and UML
+* An initial version of Class and sequence digram.
 * Tools : [draw.io](draw.io).
 	- Display  : (\*.png).
 	- Editable : (\*.xml).
 * Target platform : Web Application / Application.
 * Implementation language : Python, Django (maybe), HTML, XML, UML.
+
+### Increment 3 : Design
+* An initial version of Software Design Document is in the **Design** directory.
+* Main frame prototype is added. Prototype right now is stored in **src** directory.
+    - If the user has all the requirements python modules, just simply double click **Simulation.py** (main method).
+    - If the user unable to execute **Simulation.py** by double-clicking, just navigate to the **src** and execute
+        - ```source ./run.sh```
 
 ## Traffic presentation
 ![alt text](Images/roadMap_ver3.0.png)
