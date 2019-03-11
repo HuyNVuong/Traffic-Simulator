@@ -11,6 +11,7 @@ class CommandPallete(Frame):
         self.pack(side=TOP)
         self.running = False
         self.create_widgets()
+        self._ispause = False
         
     def create_widgets(self):
         # Starting Button
@@ -48,11 +49,12 @@ class CommandPallete(Frame):
         # self.quit.pack(side="right")
 
     def start(self):
+        self._ispause = False
         self.running = True
         print("Starting project...")
 
     def pause(self):
-        self.running = False
+        self._ispause = True
         print("Paused.")
 
     def stop(self):
