@@ -23,7 +23,7 @@ git fetch
 ```
 git push -u origin new_branch
 ```
-* To merge a branch :
+* To merge a branch:
 ```
 git checkout master
 git merge branch_to_merge
@@ -31,30 +31,32 @@ git branch -d branch_to_merge
 ```
 ## Milestone
 ### Increment 1 : Analysis 
-* An initial version of RAD is attached in Requirements directory.
+* An initial version of RAD is attached in Requirements directory
 
 ### Increment 2 : Object oriented Analysis and UML
-* An initial version of Class and sequence digram.
-* Tools : [draw.io](draw.io).
-	- Display  : (\*.png).
-	- Editable : (\*.xml).
-* Target platform : Web Application / Application.
-* Implementation language : Python, Django (maybe), HTML, XML, UML.
+* An initial version of Class and sequence digram
+* Tools : [draw.io](draw.io)
+	- Display  : (\*.png)
+	- Editable : (\*.xml)
+* Target platform : Web Application / Application
+* Implementation language : Python, ~~Django (maybe)~~, ~~HTML~~, XML, UML
+
 
 ### Increment 3 : Design
-* An initial version of Software Design Document is in the **Design** directory.
-* Main frame prototype is added. Prototype right now is stored in **src** directory.
-    - If the user has all the requirements python modules, just simply double click **Simulation.py** (main method).
+* An initial version of Software Design Document is in the **Design** directory
+* Main frame prototype is added. Prototype right now is stored in **src** directory
+    - If the user has all the requirements python modules, just simply double click **Simulation.py** (main method)
     - If the user unable to execute **Simulation.py** by double-clicking, just navigate to the **src** and execute
         - ```source ./run.sh```
 
 ### Increment 4 : Object Design Development and Coding
 * Program is stored in the src, structure are designed based solely on Object Oriented Paradigm
-* A small testing framework, is set up for testing along with designing\
+* A small testing framework, is set up for testing along with designing
 * New modules added : ```pytest```
 * Features to develop:
     - Moving car and path finding
-    - Interactive user interface.
+    - Interactive user interface
+    - Yada
 
 
 ## Traffic presentation
