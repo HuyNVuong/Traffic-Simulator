@@ -48,5 +48,14 @@ git branch -d branch_to_merge
     - If the user unable to execute **Simulation.py** by double-clicking, just navigate to the **src** and execute
         - ```source ./run.sh```
 
+### Increment 4 : Object Design Development and Coding
+* Program is stored in the src, structure are designed based solely on Object Oriented Paradigm
+* A small testing framework, is set up for testing along with designing\
+* New modules added : ```pytest```
+* Features to develop:
+    - Moving car and path finding
+    - Interactive user interface.
+
+
 ## Traffic presentation
 ![alt text](Images/roadMap_ver3.0.png)
