@@ -12,6 +12,8 @@ class Car(Canvas):
         self.state = state
         if self.state == Tiles.car_left :
             self.draw_car_horizontal()
+        elif self.state == Tiles.car_right : 
+            self.draw_car_horizontal()
         self.init_speed()
 
     def __repr__(self):
