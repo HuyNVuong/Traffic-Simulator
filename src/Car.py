@@ -1,6 +1,6 @@
 import importlib
 from tkinter import Canvas
-from Raw import *
+from Raw import Point, Tiles
 # importlib.import_module(Raw)
 
 class Car(Canvas):
