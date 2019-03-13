@@ -59,5 +59,4 @@ git branch -d branch_to_merge
     - Yada
 
 
-## Traffic presentation
-![alt text](Images/roadMap_ver3.0.png)
+
