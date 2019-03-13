@@ -1,6 +1,6 @@
 import importlib
 from tkinter import Canvas
-from Raw import *
+from Raw import Point, Tiles
 # importlib.import_module(Raw)
 
 class Car(Canvas):
@@ -11,6 +11,8 @@ class Car(Canvas):
         self.y = coordinate.y
         self.state = state
         if self.state == Tiles.car_left :
+            self.draw_car_horizontal()
+        elif self.state == Tiles.car_right : 
             self.draw_car_horizontal()
         self.init_speed()
 
