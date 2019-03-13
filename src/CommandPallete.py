@@ -11,19 +11,27 @@ class CommandPallete(Frame):
         self.pack(side=TOP)
         self.running = False
         self.create_widgets()
+        self.paused = True
         
     def create_widgets(self):
         # Starting Button
-        self.start_button = Button(self)
-        self.start_button["text"] = "Start"
-        self.start_button["command"] = self.start
-        self.start_button.grid(row=2, column=3, columnspan=2, padx=20, pady=10)
-
+        if self.paused:
+       		self.paused = False
+        	self.start_button = Button(self, activebackground="Red", highlightbackground="Yellow", fg="Red", highlightthickness=50 )
+        	self.start_button["text"] = "Start"
+        	self.start_button["command"] = self.start
+        	self.start_button.grid(row=2, column=3, columnspan=2, padx=20, pady=10)
+        	self.oldtime = time()
+        	self.start_timer()
+        
         # Pausing Button
-        self.pause_button = Button(self)
-        self.pause_button["text"] = "Pause"
-        self.pause_button["command"] = self.pause
-        self.pause_button.grid(row=2, column=7, columnspan=2, padx=200, pady=10)
+        if self.paused:
+        	self.pause_button = Button(self, activebackground="Red", highlightbackground="Yellow", fg="Red", highlightthickness=50 )
+        	self.paused = True
+        	self.oldtime = time()
+        	self.pause_button["text"] = "Pause"
+        	self.pause_button["command"] = self.pause
+        	self.pause_button.grid(row=2, column=7, columnspan=2, padx=200, pady=10)
 
         # Timer label
         self.timer = Label(self)
@@ -70,3 +78,6 @@ class CommandPallete(Frame):
         hours, minutes = divmod(minutes, 60)
         self.timer.configure(text="Time Elapsed : %02d:%02d:%02d"%(hours,minutes,seconds))
         self.after(1000, self.start_timing)
+        
+    
+		
