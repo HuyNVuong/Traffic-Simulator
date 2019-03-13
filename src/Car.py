@@ -62,3 +62,11 @@ class Car(Canvas):
         self.__component.append(self.create_rectangle(self.x * 28 - 2, self.y * 29 + 22, 1 + self.x * 28, 27 + self.y * 29, fill="black"))
         self.__component.append(self.create_rectangle(self.x * 28 + 14, self.y * 29 + 7, 17 + self.x * 28, 12 + self.y * 29, fill="black"))
         self.__component.append(self.create_rectangle(self.x * 28 + 14, self.y * 29 + 22, 17 + self.x * 28, 27 + self.y * 29, fill="black"))
+
+    def turn_left(self):
+        self.dx, self.dy = -self.dy, self.dx
+
+    def turn_right(self):
+        self.dx, self.dy = self.dy, -self.dx
+
+    

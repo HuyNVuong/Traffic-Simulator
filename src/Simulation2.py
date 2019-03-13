@@ -14,17 +14,25 @@ if __name__ == "__main__":
     # oval = car.create_oval(1, 2, 100, 101, fill="red")
     car.pack()
     car2.pack()
+    counter = 0
     while command.running is not True:
         command.update()
         root.update()
     while command.running is True:
+        if counter % 20 == 0:
+            car.turn_left()
+            car2.turn_left()
+            print(car.dx, car.dy)
+            print(car2.dx, car2.dy)  
         if command._ispause is not True:
             for com in car.get_component():
                 car.move(com, car.dx, car.dy)
             for com in car2.get_component():
                 car2.move(com, car2.dx, car2.dy)
             sleep(0.01)
+        counter += 1
         command.update()
         traffic_map.update()
         root.update()
+        
     root.mainloop()
