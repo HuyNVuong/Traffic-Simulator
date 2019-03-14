@@ -1,5 +1,5 @@
-from tkinter import *
-from time import *
+from tkinter import Frame, Button, Label
+from time import time
 from Map import Map
 
 class CommandPallete(Frame):
@@ -8,7 +8,7 @@ class CommandPallete(Frame):
         super().__init__(master)
         self.master = master
         self.start_time = time()
-        self.pack(side=TOP)
+        self.pack(side='top')
         self.running = False
         self.create_widgets()
         self._ispause = False
