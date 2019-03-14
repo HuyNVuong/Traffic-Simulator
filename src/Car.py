@@ -64,31 +64,7 @@ class Car(Canvas):
         self.__component.append(self.create_rectangle(self.x * 28 + 14, self.y * 29 + 22, 17 + self.x * 28, 27 + self.y * 29, fill="black"))
 
     def turn_left(self):
-        if self.dx !=  0:
-            # Car bodself.y
-            self.__component.append(self.create_rectangle(self.x * 28, self.y * 29, 15 + self.x * 28, 30 + self.y * 29, fill="yellow"))
-            # Car features
-            self.__component.append(self.create_rectangle(self.x * 28 + 5, self.y * 29 + 15, 10 + self.x * 28, 23 + self.y * 29, fill="black"))
-            self.__component.append(self.create_rectangle(self.x * 28, self.y * 29, 7 + self.x * 28, 4 + self.y * 29, fill="red"))
-            self.__component.append(self.create_rectangle(self.x * 28 + 8, self.y * 29 , 15 + self.x * 28, 4 + self.y * 29, fill="red"))
-            # 4 wheels
-            self.__component.append(self.create_rectangle(self.x * 28 - 2, self.y * 29 + 7, 1 + self.x * 28, 12 + self.y * 29, fill="black"))
-            self.__component.append(self.create_rectangle(self.x * 28 - 2, self.y * 29 + 22, 1 + self.x * 28, 27 + self.y * 29, fill="black"))
-            self.__component.append(self.create_rectangle(self.x * 28 + 14, self.y * 29 + 7, 17 + self.x * 28, 12 + self.y * 29, fill="black"))
-            self.__component.append(self.create_rectangle(self.x * 28 + 14, self.y * 29 + 22, 17 + self.x * 28, 27 + self.y * 29, fill="black"))
-        else:
-            # Car body
-            self.__component.append(self.create_rectangle(self.x * 28, self.y * 29, 30 + self.x * 28, 15 + self.y * 29, fill="yellow"))
-            # Car features
-            self.__component.append(self.create_rectangle(self.x * 28 + 15, self.y * 29 + 5, 23 + self.x * 28, 10 + self.y * 29, fill="black"))
-            self.__component.append(self.create_rectangle(self.x * 28, self.y * 29, 4 + self.x * 28, 7 + self.y * 29, fill="red"))
-            self.__component.append(self.create_rectangle(self.x * 28, self.y * 29 + 8, 4 + self.x * 28, 15 + self.y * 29, fill="red"))
-            # 4 wheels
-            self.__component.append(self.create_rectangle(self.x * 28 + 7, self.y * 29 - 2, 12 + self.x * 28, 1 + self.y * 29, fill="black"))
-            self.__component.append(self.create_rectangle(self.x * 28 + 22, self.y * 29 - 2, 27 + self.x * 28, 1 + self.y * 29, fill="black"))
-            self.__component.append(self.create_rectangle(self.x * 28 + 7, self.y * 29 + 14, 12 + self.x * 28, 17 + self.y * 29, fill="black"))
-            self.__component.append(self.create_rectangle(self.x * 28 + 22, self.y * 29 + 14, 27 + self.x * 28, 17 + self.y * 29, fill="black"))
-            self.dx, self.dy = -self.dy, self.dx
+        self.dx, self.dy = -self.dy, self.dx
 
     def turn_right(self):
         self.dx, self.dy = self.dy, -self.dx
