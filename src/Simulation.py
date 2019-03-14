@@ -1,10 +1,10 @@
 # Main driver that executes the program
 
 from Map import Map
-from Raw import *
+from Raw import Tiles, raw_map
 from Car import Car
 from CommandPallete import CommandPallete
-from tkinter import *
+from tkinter import Tk, Frame, Label, Button
 from time import sleep
 
 if __name__ == "__main__":  
