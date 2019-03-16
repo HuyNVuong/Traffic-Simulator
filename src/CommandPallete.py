@@ -19,11 +19,6 @@ class CommandPallete(Frame):
         self.start_button["text"] = "Start"
         self.start_button["command"] = self.start
         self.start_button.grid(row=2, column=3, columnspan=2, padx=20, pady=10)
-        
-        self.button = Button(self)
-        self.button["text"] = "Desired sign"
-        self.button["command"] = self.desiredSigns
-        self.button.grid(row=2, column=3, columnspan=2, padx=20, pady=10)
 
         # Pausing Button
         self.pause_button = Button(self)
@@ -69,14 +64,6 @@ class CommandPallete(Frame):
     def step(self):
         for car in Map.cars:
             car.move()
-            
-    def desiredSigns(self):
-        if self._ispaused:
-            self._ispaused = False
-            self.button.config(text='Stop Sign')
-        else:
-            self._ispaused = True
-            self.button.config(text='Traffic Light')
 
     def start_timing(self):
         # your code
