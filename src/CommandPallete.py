@@ -54,7 +54,7 @@ class CommandPallete(Frame):
         quitImage = PhotoImage(file='buttonImages/QuitButton.png')
         smallerImage = quitImage.subsample(14,14)
         self.quit.image = smallerImage
-        self.quit = Button(self, image=smallerImage, command=self.master.destroy)
+        self.quit = Button(self, image=smallerImage, command=self.master.destroy, height=35, width=75)
         self.quit.grid(row=3, column=11, columnspan=2, padx=20, pady=10)
         # self.quit.pack(side="right")
 
