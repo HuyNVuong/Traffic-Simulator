@@ -24,8 +24,10 @@ class CommandPallete(Frame):
 
         # Pausing Button
         self.pause_button = Button(self)
-        self.pause_button["text"] = "Pause"
-        self.pause_button["command"] = self.pause
+        pauseImage = PhotoImage(file='buttonImages/PauseButton.png')
+        smallerImage = pauseImage.subsample(14,14)
+        self.pause_button.image = smallerImage
+        self.pause_button = Button(self, image=smallerImage, command=self.pause, height=35, width=75)
         self.pause_button.grid(row=2, column=7, columnspan=2, padx=200, pady=10)
 
         # Timer label
