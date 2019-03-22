@@ -37,8 +37,10 @@ class CommandPallete(Frame):
 
         # Stopping Button
         self.stop_button = Button(self)
-        self.stop_button["text"] = "Stop"
-        self.stop_button["command"] = self.stop
+        stopImage = PhotoImage(file='buttonImages/StopButton.png')
+        smallerImage = stopImage.subsample(14,14)
+        self.stop_button.image = smallerImage
+        self.stop_button = Button(self, image=smallerImage, command=self.stop, height=35, width=75)
         self.stop_button.grid(row=3, column=3, columnspan=2, padx=20, pady=10)
 
         # Stepping Button
