@@ -1,4 +1,4 @@
-from tkinter import Frame, Button, Label
+from tkinter import Frame, Button, Label, PhotoImage
 from time import time
 from Map import Map
 
@@ -16,8 +16,10 @@ class CommandPallete(Frame):
     def create_widgets(self):
         # Starting Button
         self.start_button = Button(self)
-        self.start_button["text"] = "Start"
-        self.start_button["command"] = self.start
+        startImage = PhotoImage(file='buttonImages/StartButton.png')
+        smallerImage = startImage.subsample(14,14)
+        self.start_button.image = smallerImage
+        self.start_button = Button(self, image=smallerImage, command=self.start, height=35, width=75)
         self.start_button.grid(row=2, column=3, columnspan=2, padx=20, pady=10)
 
         # Pausing Button
