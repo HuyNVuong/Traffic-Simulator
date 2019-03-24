@@ -18,33 +18,30 @@ class Map(Frame):
 	__cars = set()
 
 	def create_widgets(self):
-		# self.map = Canvas()
-		self.map = Canvas(self, width=850, height=540)
+		self.city = Canvas(self, width=850, height=480)
 		self.paint()
-		self.map.pack()
-		# self.map.pack()
+		self.city.pack()
 
 	def paint(self):
 		for y in range(len(raw_map)):
 			for x in range(len(raw_map[y])):
-				if (raw_map[y][x] == Tiles.wall):    
-					self.map.create_rectangle(x * 28, y * 29, 20 + x * 28, 20 + y * 29, outline="black", fill="#808080")
-				if (raw_map[y][x] == Tiles.car_left):
-					self.add_car(x, y, raw_map)
+				if raw_map[y][x] == Tiles.wall:    
+					self.city.create_rectangle(x * 28, y * 29, 20 + x * 28, 20 + y * 29, outline="black", fill="#808080")
+				elif raw_map[y][x] == Tiles.car_left:
+					car = Car(Point(x, y), raw_map[y][x], self.city)
+					self.__cars.add(car)
 
 	def say_hi(self):
 		print("hi there, everyone!")
 		
 	def draw_block(self, x, y):
-		self.map.create_rectangle(x * 28, y * 29, 20 + x * 28, 20 + y * 29, outline="black", fill="#808080")
-		# self.draw_dot(x, y)
+		self.city.create_rectangle(x * 28, y * 29, 20 + x * 28, 20 + y * 29, outline="black", fill="#808080")
 
 	def draw_dot(self, x, y):
-		self.map.create_rectangle(x * 28 + 10, y * 29 + 10, x * 28 + 16, y * 29 + 16, fill="#fff")
+		self.city.create_rectangle(x * 28 + 10, y * 29 + 10, x * 28 + 16, y * 29 + 16, fill="#fff")
 
 	def add_car(self, x, y, state):
-		car = Car(Point(x, y), state, self)
-		car.pack()
+		car = Car(Point(x, y), state, self.city)
 		self.__cars.add(car)
 
 	def get_cars(self) -> set():
@@ -59,4 +56,4 @@ class Map(Frame):
 		return open_spot
 
 
-    
+

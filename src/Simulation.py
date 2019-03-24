@@ -1,7 +1,7 @@
 # Main driver that executes the program
 
 from Map import Map
-from Raw import Tiles, raw_map
+from Raw import Tiles, raw_map, Point
 from Car import Car
 from CommandPallete import CommandPallete
 from tkinter import Tk, Frame, Label, Button
@@ -21,21 +21,34 @@ if __name__ == "__main__":
     start_window.mainloop() 
     # End of opening window
 
-
+       
 
     root = Tk()
-    root.title("Traffic Simulator")
-    command = CommandPallete(master=root)
-    traffic_map = Map(master=root)
-    while command.running is True:
-        print('moving')
-        for car in traffic_map.get_cars():
-            raw_map[car.y][car.x] = Tiles.road
-            car.move()
-            raw_map[car.y][car.x] = car.state
-            sleep(0.1)
-        traffic_map.paint()
+    command = CommandPallete(root)
+    traffic_map = Map(root)
+    counter = 0
+    while command.running is not True:
+        command.update()
         root.update()
+    while command.running is True:
+        # for car in traffic_map.get_cars():
+        if counter % 90 == 0 and counter > 0:
+            for car in traffic_map.get_cars():
+                car.turn_left()
+                for comp in car.get_component():
+                    print(comp)
+        if command._ispause is not True:
+            for car in traffic_map.get_cars():
+                for comp in car.get_component():
+                    traffic_map.city.move(comp, car.dx, car.dy)
+                car.x += (car.dx / 28) 
+                car.y += (car.dy / 29)
+        sleep(0.01)
+        counter += 1
+        command.update()
+        traffic_map.update()
+        root.update()
+        
     root.mainloop()
     # while command.pause is not True:
     #     root.update()
