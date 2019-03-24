@@ -18,6 +18,14 @@ if __name__ == "__main__":
     start_button = Button(start_frame, fg="red", command=start_window.destroy)
     start_button["text"] = "Open Simulation"
     start_button.pack()
+    
+    import_button = Button(start_frame, fg="green")
+    import_button["text"] = "Import Map"
+    import_button.pack()
+
+    creator_button = Button(start_frame, fg="blue")
+    creator_button["text"] = "Create a Map"
+    creator_button.pack()
     start_window.mainloop() 
     # End of opening window
 
