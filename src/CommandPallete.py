@@ -72,8 +72,7 @@ class CommandPallete(Frame):
         print("Stopped.")
 
     def step(self):
-        for car in Map.cars:
-            car.move()
+        pass
 
     def start_timing(self):
         # your code
