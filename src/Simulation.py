@@ -26,15 +26,15 @@ if __name__ == "__main__":
     root = Tk()
     root.title("Traffic Simulator")
     command = CommandPallete(master=root)
-    trafficMap = Map(master=root)
+    traffic_map = Map(master=root)
     while command.running is True:
         print('moving')
-        for car in trafficMap.cars:
-            raw_map[car.y][car.x] = Tiles.open_road_down
+        for car in traffic_map.get_cars():
+            raw_map[car.y][car.x] = Tiles.road
             car.move()
             raw_map[car.y][car.x] = car.state
             sleep(0.1)
-        trafficMap.paint()
+        traffic_map.paint()
         root.update()
     root.mainloop()
     # while command.pause is not True:

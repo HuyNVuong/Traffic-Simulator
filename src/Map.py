@@ -47,7 +47,7 @@ class Map(Frame):
 		car.pack()
 		self.__cars.add(car)
 
-	def get_car(self) -> set():
+	def get_cars(self) -> set():
 		return self.__cars
 
 	def open_spot(self):
