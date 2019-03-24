@@ -47,16 +47,16 @@ git branch -d branch_to_merge
 * Main frame prototype is added. Prototype right now is stored in **src** directory
     - If the user has all the requirements python modules, just simply double click **Simulation.py** (main method)
     - If the user unable to execute **Simulation.py** by double-clicking, just navigate to the **src** and execute
-        - ```source ./run.sh```
+        - ```sh run.sh```
+* Modules added ```numpy```
 
 ### Increment 4 : Object Design Development and Coding
 * Program is stored in the src, structure are designed based solely on Object Oriented Paradigm
 * A small testing framework, is set up for testing along with designing
-* New modules added : ```pytest```
-* Features to develop:
-    - Moving car and path finding
-    - Interactive user interface
-    - Yada
+* New modules added : ```pytest```, ```Pillow```
+* Features developed:
+    - Application is readable and usable as a GUI application.
+    - Cars and City is viewable and understandable, car is able to move around the city when start button is triggered
 
 
 
