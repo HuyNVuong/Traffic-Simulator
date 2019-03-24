@@ -44,19 +44,21 @@ git branch -d branch_to_merge
 
 ### Increment 3 : Design
 * An initial version of Software Design Document is in the **Design** directory
+* * Modules added ```numpy```
 * Main frame prototype is added. Prototype right now is stored in **src** directory
     - If the user has all the requirements python modules, just simply double click **Simulation.py** (main method)
     - If the user unable to execute **Simulation.py** by double-clicking, just navigate to the **src** and execute
         - ```sh run.sh```
-* Modules added ```numpy```
 
 ### Increment 4 : Object Design Development and Coding
+* Class Diagram updated, some Sequence Diagram modified
 * Program is stored in the src, structure are designed based solely on Object Oriented Paradigm
 * A small testing framework, is set up for testing along with designing
 * New modules added : ```pytest```, ```Pillow```
 * Features developed:
     - Application is readable and usable as a GUI application.
     - Cars and City is viewable and understandable, car is able to move around the city when start button is triggered
+
 
 
 
