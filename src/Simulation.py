@@ -47,10 +47,10 @@ if __name__ == "__main__":
     command = CommandPallete(root)
     traffic_map = Map(root)
     counter = 0
-    while command.running is not True:
+    while command._running is not True:
         command.update()
         root.update()
-    while command.running is True:
+    while command._running is True:
         # for car in traffic_map.get_cars():
         if counter % 150 == 0 and counter > 0:
             for car in traffic_map.get_cars():

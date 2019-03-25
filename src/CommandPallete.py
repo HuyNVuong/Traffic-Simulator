@@ -7,11 +7,11 @@ class CommandPallete(Frame):
     def __init__(self, master=None):
         super().__init__(master)
         self.master = master
-        self.start_time = time()
         self.pack(side='top')
-        self.running = False
-        self.create_widgets()
+        self._running = False
         self._ispause = False
+        self.start_time = time()
+        self.create_widgets()
         
     def create_widgets(self):
         # Starting Button
@@ -62,7 +62,7 @@ class CommandPallete(Frame):
 
     def start(self):
         self._ispause = False
-        self.running = True
+        self._running = True
         print("Starting project...")
 
     def pause(self):
@@ -70,16 +70,24 @@ class CommandPallete(Frame):
         print("Paused.")
 
     def stop(self):
-        self.running = False
+        self._running = False
+        self._ispause = True
         print("Stopped.")
 
     def reset(self):
-        pass
+        if self._ispause is True or self._running is False:
+            # reset
+            pass
+        else:
+            pass
 
     def start_timing(self):
         # your code
         elapsed_time = time() - self.start_time
         minutes, seconds = divmod(elapsed_time, 60)
         hours, minutes = divmod(minutes, 60)
-        self.timer.configure(text="Time Elapsed : %02d:%02d:%02d"%(hours,minutes,seconds))
-        self.after(1000, self.start_timing)
+        if self._ispause is not True or self._running is True:
+            self.timer.configure(text="Time Elapsed : %02d:%02d:%02d"%(hours,minutes,seconds))
+            self.after(1000, self.start_timing)
+
+
