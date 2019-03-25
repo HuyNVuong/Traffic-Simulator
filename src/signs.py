@@ -9,14 +9,14 @@ class Signs:
 
         self.button = tk.Button(root, text='Select Your Desire', command=self.desiredSigns)
         self.button.grid(row=2, column=3, columnspan=2, padx=20, pady=10)
-        self.button.pack()
+        # self.button.pack()
         self.otherbutton = tk.Button(root, text='Select Your Desire', command=self.desiredSign)
         self.otherbutton.grid(row=2, column=7, columnspan=2, padx=200, pady=10)
-        self.otherbutton.pack()
+        # self.otherbutton.pack()
         self.button2 = tk.Button(root, text='Select Your Desire', command=self.desired)
-        self.button2.pack()
+        # self.button2.pack()
         self.otherbutton2 = tk.Button(root, text='Select Your Desire', command=self.desiredSign2)
-        self.otherbutton2.pack()
+        # self.otherbutton2.pack()
 
 
 

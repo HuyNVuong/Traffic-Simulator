@@ -8,11 +8,14 @@ from tkinter import Tk, Frame, Label, Button
 from time import sleep
 from PIL import Image, ImageTk
 
-if __name__ == "__main__":  
+def foo():
+    import_button.config(text='Comming soon')
+
+if __name__ == '__main__':  
 
     # Opening window
     start_window = Tk()
-    start_window.title("Menu")
+    start_window.title('Menu')
     start_frame = Frame(start_window, width=850, height=540)
     start_frame.pack()
 
@@ -22,19 +25,19 @@ if __name__ == "__main__":
     img.image = render
     img.pack()
 
-    start_label = Label(img, text="City Traffic Simulation")
+    start_label = Label(img, text='City Traffic Simulation')
     start_label.grid(row=2, column=3, columnspan=2, padx=300, pady=20)
 
-    start_button = Button(img, fg="red", command=start_window.destroy)
-    start_button["text"] = "Open Simulation"
+    start_button = Button(img, fg='red', command=start_window.destroy)
+    start_button['text'] = 'Open Simulation'
     start_button.grid(row=3, column=3, columnspan=2, padx=300, pady=20)
 
-    import_button = Button(img, fg="green")
-    import_button["text"] = "Import Map"
+    import_button = Button(img, fg='green', command=foo)
+    import_button['text'] = 'Import Map'
     import_button.grid(row=4, column=3, columnspan=2, padx=300, pady=20)
 
-    creator_button = Button(img, fg="blue")
-    creator_button["text"] = "Create a Map"
+    creator_button = Button(img, fg='blue')
+    creator_button['text'] = 'Create a Map'
     creator_button.grid(row=5, column=3, columnspan=2, padx=300, pady=20)
 
     start_window.mainloop() 
@@ -43,7 +46,7 @@ if __name__ == "__main__":
        
 
     root = Tk()
-    root.title("Traffic Simulation")
+    root.title('Traffic Simulation')
     command = CommandPallete(root)
     traffic_map = Map(root)
     counter = 0
