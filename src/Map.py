@@ -10,7 +10,7 @@ from ActionListener import actionListenter
 
 class Map(Frame):
 	def __init__(self, master=None):
-		super().__init__(master, width=850, height=540)
+		super().__init__(master, width=900, height=540)
 		self.master = master 
 		self.pack(side='bottom')
 		self.create_widgets()
@@ -18,7 +18,7 @@ class Map(Frame):
 	__cars = set()
 
 	def create_widgets(self):
-		self.city = Canvas(self, width=850, height=480)
+		self.city = Canvas(self, width=900, height=480)
 		self.paint()
 		self.city.pack()
 
@@ -26,7 +26,7 @@ class Map(Frame):
 		for y in range(len(raw_map)):
 			for x in range(len(raw_map[y])):
 				if raw_map[y][x] == Tiles.wall:    
-					self.city.create_rectangle(x * 28, y * 29, 20 + x * 28, 20 + y * 29, outline="black", fill="#808080")
+					self.city.create_rectangle(x * 30, y * 30, 20 + x * 30, 20 + y * 30, outline="black", fill="#808080")
 				elif raw_map[y][x] == Tiles.car_left:
 					car = Car(Point(x, y), raw_map[y][x], self.city)
 					self.__cars.add(car)
@@ -35,10 +35,10 @@ class Map(Frame):
 		print("hi there, everyone!")
 		
 	def draw_block(self, x, y):
-		self.city.create_rectangle(x * 28, y * 29, 20 + x * 28, 20 + y * 29, outline="black", fill="#808080")
+		self.city.create_rectangle(x * 30, y * 30, 28 + x * 30, 28 + y * 30, outline="black", fill="#808080")
 
 	def draw_dot(self, x, y):
-		self.city.create_rectangle(x * 28 + 10, y * 29 + 10, x * 28 + 16, y * 29 + 16, fill="#fff")
+		self.city.create_rectangle(x * 30 + 10, y * 30 + 10, x * 30 + 16, y * 30 + 16, fill="#fff")
 
 	def add_car(self, x, y, state):
 		car = Car(Point(x, y), state, self.city)
