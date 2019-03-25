@@ -43,11 +43,13 @@ class CommandPallete(Frame):
         self.stop_button = Button(self, image=smallerImage, command=self.stop, height=35, width=75)
         self.stop_button.grid(row=3, column=3, columnspan=2, padx=20, pady=10)
 
-        # Stepping Button
-        self.step_button = Button(self)
-        self.step_button["text"] = "Step"
-        self.step_button["command"] = self.step
-        self.step_button.grid(row=3, column=7, columnspan=2, padx=200, pady=10)
+        # Reset Button
+        self.reset_button = Button(self)
+        resetImage = PhotoImage(file='buttonImages/ResetButton.png')
+        smallerImage = resetImage.subsample(14,14)
+        self.reset_button.image = smallerImage
+        self.reset_button = Button(self, image=smallerImage, command=self.reset, height=35, width=75)
+        self.reset_button.grid(row=3, column=7, columnspan=2, padx=200, pady=10)
 
         # Quit button
         self.quit = Button(self)
@@ -71,7 +73,7 @@ class CommandPallete(Frame):
         self.running = False
         print("Stopped.")
 
-    def step(self):
+    def reset(self):
         pass
 
     def start_timing(self):
