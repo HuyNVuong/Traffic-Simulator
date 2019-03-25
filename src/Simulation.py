@@ -13,27 +13,27 @@ if __name__ == "__main__":
     # Opening window
     start_window = Tk()
     start_window.title("Menu")
-    start_frame = Frame(start_window, width=850, height=540)
+    start_frame = Frame(start_window, width=850, height=540, bg='#d6a44a')
     start_frame.pack()
 
-    raw = Image.open('./data/traffic-background.jpg')
-    render = ImageTk.PhotoImage(raw)
-    img = Label(start_frame, image=render, width=850, height=540)
-    img.image = render
-    img.pack()
+    # raw = Image.open('./data/traffic-background.jpg')
+    # render = ImageTk.PhotoImage(raw)
+    # img = Label(start_frame, image=render, width=850, height=540)
+    # img.image = render
+    # img.pack()
 
-    start_label = Label(img, text="City Traffic Simulation")
+    start_label = Label(start_frame, text="City Traffic Simulation")
     start_label.grid(row=2, column=3, columnspan=2, padx=300, pady=20)
 
-    start_button = Button(img, fg="red", command=start_window.destroy)
+    start_button = Button(start_frame, fg="red", command=start_window.destroy)
     start_button["text"] = "Open Simulation"
     start_button.grid(row=3, column=3, columnspan=2, padx=300, pady=20)
 
-    import_button = Button(img, fg="green")
+    import_button = Button(start_frame, fg="green")
     import_button["text"] = "Import Map"
     import_button.grid(row=4, column=3, columnspan=2, padx=300, pady=20)
 
-    creator_button = Button(img, fg="blue")
+    creator_button = Button(start_frame, fg="blue")
     creator_button["text"] = "Create a Map"
     creator_button.grid(row=5, column=3, columnspan=2, padx=300, pady=20)
 
