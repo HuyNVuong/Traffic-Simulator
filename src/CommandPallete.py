@@ -1,6 +1,7 @@
 from tkinter import Frame, Button, Label, PhotoImage
 from time import time
 from Map import Map
+from Raw import resource_path
 
 class CommandPallete(Frame):
     
@@ -16,7 +17,7 @@ class CommandPallete(Frame):
     def create_widgets(self):
         # Starting Button
         self.start_button = Button(self)
-        startImage = PhotoImage(file='buttonImages/StartButton.png')
+        startImage = PhotoImage(file=resource_path('buttonImages/StartButton.png'))
         smallerImage = startImage.subsample(14,14)
         self.start_button.image = smallerImage
         self.start_button = Button(self, image=smallerImage, command=self.start, height=35, width=75)
@@ -24,7 +25,7 @@ class CommandPallete(Frame):
 
         # Pausing Button
         self.pause_button = Button(self)
-        pauseImage = PhotoImage(file='buttonImages/PauseButton.png')
+        pauseImage = PhotoImage(file=resource_path('buttonImages/PauseButton.png'))
         smallerImage = pauseImage.subsample(14,14)
         self.pause_button.image = smallerImage
         self.pause_button = Button(self, image=smallerImage, command=self.pause, height=35, width=75)
@@ -37,7 +38,7 @@ class CommandPallete(Frame):
 
         # Stopping Button
         self.stop_button = Button(self)
-        stopImage = PhotoImage(file='buttonImages/StopButton.png')
+        stopImage = PhotoImage(file=resource_path('buttonImages/StopButton.png'))
         smallerImage = stopImage.subsample(14,14)
         self.stop_button.image = smallerImage
         self.stop_button = Button(self, image=smallerImage, command=self.stop, height=35, width=75)
@@ -45,7 +46,7 @@ class CommandPallete(Frame):
 
         # Reset Button
         self.reset_button = Button(self)
-        resetImage = PhotoImage(file='buttonImages/ResetButton.png')
+        resetImage = PhotoImage(file=resource_path('buttonImages/ResetButton.png'))
         smallerImage = resetImage.subsample(14,14)
         self.reset_button.image = smallerImage
         self.reset_button = Button(self, image=smallerImage, command=self.reset, height=35, width=75)
@@ -53,7 +54,7 @@ class CommandPallete(Frame):
 
         # Quit button
         self.quit = Button(self)
-        quitImage = PhotoImage(file='buttonImages/QuitButton.png')
+        quitImage = PhotoImage(file=resource_path('buttonImages/QuitButton.png'))
         smallerImage = quitImage.subsample(14,14)
         self.quit.image = smallerImage
         self.quit = Button(self, image=smallerImage, command=self.master.destroy, height=35, width=75)

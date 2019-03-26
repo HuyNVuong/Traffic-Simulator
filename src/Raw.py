@@ -1,6 +1,8 @@
 from enum import IntEnum
 from typing import NamedTuple, List
 from numpy import zeros
+import os
+import sys
 
 class Point(NamedTuple):
     x : int
@@ -26,6 +28,16 @@ predef = {
     "stop_sign" : 9,
     "traffic_lights" : 10
 }
+
+def resource_path(relative_path) -> str: 
+    """ Get absolute path to resource, works for dev and for PyInstaller """
+    try:
+        # PyInstaller creates a temp folder and stores path in _MEIPASS
+        base_path = getattr(sys, '_MEIPASS', '.')+'/'
+    except Exception:
+        base_path = os.path.abspath(".")
+
+    return base_path + relative_path
 
 def fromCSV(file_path : str) -> List[List[int]]:
     with open(file_path) as file:

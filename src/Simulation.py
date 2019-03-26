@@ -1,7 +1,7 @@
 # Main driver that executes the program
 
 from Map import Map
-from Raw import Tiles, raw_map, Point
+from Raw import Tiles, raw_map, Point, resource_path
 from Car import Car
 from CommandPallete import CommandPallete
 from tkinter import Tk, Frame, Label, Button
@@ -16,7 +16,7 @@ if __name__ == '__main__':
     start_frame = Frame(start_window, width=850, height=540)
     start_frame.pack()
 
-    raw = Image.open('./data/traffic-background.jpg')
+    raw = Image.open(resource_path('data/traffic-background.jpg'))
     render = ImageTk.PhotoImage(raw)
     img = Label(start_frame, image=render, width=850, height=540)
     img.image = render
