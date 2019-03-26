@@ -8,9 +8,6 @@ from tkinter import Tk, Frame, Label, Button
 from time import sleep
 from PIL import Image, ImageTk
 
-def foo():
-    import_button.config(text='Comming soon')
-
 if __name__ == '__main__':  
 
     # Opening window
@@ -32,7 +29,7 @@ if __name__ == '__main__':
     start_button['text'] = 'Open Simulation'
     start_button.grid(row=3, column=3, columnspan=2, padx=300, pady=20)
 
-    import_button = Button(img, fg='green', command=foo)
+    import_button = Button(img, fg='green')
     import_button['text'] = 'Import Map'
     import_button.grid(row=4, column=3, columnspan=2, padx=300, pady=20)
 
@@ -43,29 +40,44 @@ if __name__ == '__main__':
     start_window.mainloop() 
     # End of opening window
 
-       
-
     root = Tk()
     root.title('Traffic Simulation')
     command = CommandPallete(root)
     traffic_map = Map(root)
+    car_tmp = Car(Point(3, 4), Tiles.car_up, master=traffic_map.city)
     counter = 0
     while command._running is not True:
         command.update()
         root.update()
     while command._running is True:
-        # for car in traffic_map.get_cars():
+        ## Hardcode optimal path for a car
+        if counter == 60: car_tmp.turn_right()
+        if counter == 180: car_tmp.turn_right()
+        if counter == 360: car_tmp.turn_left()
+        if counter == 810: car_tmp.turn_right()
+        if counter == 960: car_tmp.turn_left()
+        if counter == 1110: car_tmp.turn_right()
+        if counter == 1140: 
+            car_tmp.turn_left()
+            car_tmp.stop()
+
         if counter % 150 == 0 and counter > 0:
             for car in traffic_map.get_cars():
-                car.turn_left()
+                car.turn_right()
         if command._ispause is not True:
             for car in traffic_map.get_cars():
                 for comp in car.get_component():
                     traffic_map.city.move(comp, car.dx, car.dy)
                 car.x += (car.dx / 30) 
                 car.y += (car.dy / 30)
+            # Preprogrammed
+            for comp_tmp in car_tmp.get_component():
+                traffic_map.city.move(comp_tmp, car_tmp.dx, car_tmp.dy)
+            car_tmp.x += (car_tmp.dx / 30) 
+            car_tmp.y += (car_tmp.dy / 30) 
+            counter += 1
         sleep(0.01)
-        counter += 1
+        
         command.update()
         traffic_map.update()
         root.update()

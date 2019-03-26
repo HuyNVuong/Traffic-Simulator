@@ -4,17 +4,20 @@ from Raw import Point, Tiles
 # importlib.import_module(Raw)
 
 class Car(Canvas):
-    __component = []
+    
     def __init__(self, coordinate : Point, state : Tiles, master=None):
         super().__init__(master)
         self.x = coordinate.x
         self.y = coordinate.y
         self.master = master
         self.state = state
+        self.__component = []
         if self.state == Tiles.car_left :
             self.draw_car_horizontal()
         elif self.state == Tiles.car_right : 
             self.draw_car_horizontal()
+        else: 
+            self.draw_car_vertical()
         self.update_speed()
 
     def __repr__(self):
@@ -78,12 +81,13 @@ class Car(Canvas):
         self.__component.append(self.master.create_rectangle(self.x * 30 + 14, self.y * 30 + 22, 17 + self.x * 30, 27 + self.y * 30, fill="black"))
 
     def turn_left(self):
-        self.dx, self.dy = -self.dy, self.dx
-        self.update_state()
-        
-
-    def turn_right(self):
         self.dx, self.dy = self.dy, -self.dx
         self.update_state()
+        
+    def turn_right(self):
+        self.dx, self.dy = -self.dy, self.dx
+        self.update_state()
 
+    def stop(self):
+        self.dx, self.dy = 0, 0
     

@@ -34,8 +34,9 @@ class Map(Frame):
 	def say_hi(self):
 		print("hi there, everyone!")
 		
-	def draw_block(self, x, y):
-		self.city.create_rectangle(x * 30, y * 30, 28 + x * 30, 28 + y * 30, outline="black", fill="#808080")
+	def draw_block(self, x, y, designated=False):
+		self.city.create_rectangle(x * 30, y * 30, 30 + x * 30, 30 + y * 30, outline="black", fill="#808080")
+
 
 	def draw_dot(self, x, y):
 		self.city.create_rectangle(x * 30 + 10, y * 30 + 10, x * 30 + 16, y * 30 + 16, fill="#fff")
