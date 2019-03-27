@@ -58,6 +58,9 @@ git branch -d branch_to_merge
 * Features developed:
     - Application is readable and usable as a GUI application.
     - Cars and City is viewable and understandable, car is able to move around the city when start button is triggered
+* Try it!
+    - Window Users: Simulation.exe is located in ```src/dist```
+    - Build it your self: Build your own runnable by execute ```sim_build.c```    __Note__ : Some path in ```Simulation.spec``` will need to be modified
 
 
 
