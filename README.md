@@ -61,6 +61,7 @@ git branch -d branch_to_merge
 * Try it!
     - Window Users: Simulation.exe is located in ```src/dist```
     - Build it your self: Build your own runnable by execute ```sim_build.c```    __Note__ : Some path in ```Simulation.spec``` will need to be modified
+    - Downloadable content can be found at https://cse.unl.edu/~hvuong/traffic-simulation/
 
 
 
