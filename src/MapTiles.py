@@ -1,7 +1,10 @@
 from tkinter import Canvas 
 from Raw import Point, Tiles
+import time 
 
 class MapTiles(Canvas):
+
+
     def __init__(self, coordinate : Point, state, master=None):
         super().__init__(master=master)
         self.master = master
@@ -10,6 +13,8 @@ class MapTiles(Canvas):
         self.y = coordinate.y
         if state == Tiles.stop_sign:
             self.draw_stop_sign()
+        elif state == Tiles.traffic_lights:
+            self.draw_traffic_lights()
 
     def __repr__(self):
         return 'Tiles'
@@ -23,51 +28,52 @@ class MapTiles(Canvas):
 
 
     def draw_traffic_lights(self):
-        self.master.city.create_oval(self.x * 30, self.y * 30 + 8, self.x * 30 + 16, self.y * 30 + 16, fill = "grey")
-        self.master.city.create_oval(self.x * 30, self.y * 30 + 8, self.x * 30 + 16, self.y * 30 + 16, fill = "grey")
-        self.master.city.create_oval(self.x * 30, self.y * 30 + 8, self.x * 30 + 16, self.y * 30 + 16, fill = "grey")
+        self.master.city.create_rectangle(self.x * 30 , self.y * 30 - 5, self.x * 30 + 20, self.y * 30 + 35, fill="black")
+        self.master.city.create_oval(self.x * 30 + 5, self.y * 30, self.x * 30 + 15, self.y * 30 + 10, fill="grey")
+        self.master.city.create_oval(self.x * 30 + 5, self.y * 30 + 11, self.x * 30 + 15, self.y * 30 + 21, fill="grey")
+        self.master.city.create_oval(self.x * 30 + 5, self.y * 30 + 22, self.x * 30 + 15, self.y * 30 + 32, fill="grey")
 
     
-    
+
     #Traffic light change functions
-    def redOn(sec):
+    def redOn(self, sec):
         t_end = time.time() + sec
         while time.time() < t_end:
-            red = self.master.city.create_oval(self.x * 30, self.y * 30 + 8, self.x * 30 + 16, self.y * 30 + 16, fill="red")
-            tk.update()
+            red = self.master.city.create_oval(self.x * 30 + 5, self.y * 30, self.x * 30 + 15, self.y * 30 + 10, fill="red")
+            self.master.update()
             time.sleep(0.05)
 
-    def redOff(sec):
+    def redOff(self, sec):
         t_end = time.time() + sec
         while time.time() < t_end:
             red = self.master.city.create_oval(self.x * 30, self.y * 30 + 8, self.x * 30 + 16, self.y * 30 + 16, fill="grey")
-            tk.update()
+            self.master.update()
             time.sleep(0.05)
 
-    def yellowOn(sec):
+    def yellowOn(self, sec):
         t_end = time.time() + sec
         while time.time() < t_end:
-            yellow = self.master.city.create_oval(self.x * 30, self.y * 30 + 8, self.x * 30 + 16, self.y * 30 + 16, fill="yellow")
-            tk.update()
+            yellow = self.master.city.create_oval(self.x * 30 + 5, self.y * 30 + 11, self.x * 30 + 15, self.y * 30 + 21, fill="yellow")
+            self.master.update()
             time.sleep(0.05)
 
-    def yellowOff(sec):
+    def yellowOff(self, sec):
         t_end = time.time() + sec
         while time.time() < t_end:
             yellow = self.master.city.create_oval(self.x * 30, self.y * 30 + 8, self.x * 30 + 16, self.y * 30 + 16, fill="grey")
-            tk.update()
+            self.master.update()
             time.sleep(0.05)
 
-    def greenOn(sec):
+    def greenOn(self, sec):
         t_end = time.time() + sec
         while time.time() < t_end:
-            green = self.master.city.create_oval(self.x * 30, self.y * 30 + 8, self.x * 30 + 16, self.y * 30 + 16, fill="green")
-            tk.update()
+            green = self.master.city.create_oval(self.x * 30 + 5, self.y * 30 + 22, self.x * 30 + 15, self.y * 30 + 32, fill="green")
+            self.master.update()
             time.sleep(0.05)
 
-    def greenOff(sec):
+    def greenOff(self, sec):
         t_end = time.time() + sec
         while time.time() < t_end:
             green = self.master.city.create_oval(self.x * 30, self.y * 30 + 8, self.x * 30 + 16, self.y * 30 + 16, fill="grey")
-            tk.update()
+            self.master.update()
             time.sleep(0.05)

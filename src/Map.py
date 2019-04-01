@@ -33,6 +33,8 @@ class Map(Frame):
 					self.__cars.add(car)
 				elif raw_map[y][x] == Tiles.stop_sign:
 					MapTiles(Point(x, y), raw_map[y][x], self)
+				elif raw_map[y][x] == Tiles.traffic_lights:
+					self.traffic_light = MapTiles(Point(x, y), raw_map[y][x], self)
 
 	def say_hi(self):
 		print("hi there, everyone!")

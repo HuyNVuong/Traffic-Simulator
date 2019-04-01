@@ -25,11 +25,17 @@ class Simulation(Tk):
             self.update()
         while self.command._running is True:
             ## Hardcode optimal path for a car
-            if counter == 60: car_tmp.turn_right()
+            if counter == 60: 
+                car_tmp.turn_right()
+                self.traffic_map.traffic_light.redOn(3)
             if counter == 180: car_tmp.turn_right()
-            if counter == 360: car_tmp.turn_left()
+            if counter == 360: 
+                car_tmp.turn_left()
+                self.traffic_map.traffic_light.yellowOn(3)
             if counter == 810: car_tmp.turn_right()
-            if counter == 960: car_tmp.turn_left()
+            if counter == 960: 
+                car_tmp.turn_left()
+                self.traffic_map.traffic_light.greenOn(3)
             if counter == 1110: car_tmp.turn_right()
             if counter == 1140: 
                 car_tmp.turn_left()

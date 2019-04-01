@@ -60,6 +60,12 @@ class Car(Canvas):
     def get_component(self):
         return self.__component
 
+    def move(self):
+        for comp in self.__component:
+            self.master.city.move(comp, self.dx, self.dy)
+        self.x += self.dx / 30
+        self.y += self.dy / 30
+
     def draw_car_horizontal(self):
         self.__component.append(self.master.create_rectangle(self.x * 30, self.y * 30, 30 + self.x * 30, 15 + self.y * 30, fill="yellow"))
         self.__component.append(self.master.create_rectangle(self.x * 30 + 15, self.y * 30 + 5, 23 + self.x * 30, 10 + self.y * 30, fill="black"))
