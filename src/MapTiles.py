@@ -13,7 +13,11 @@ class MapTiles(Canvas):
         return 'Tiles'
 
     def draw_stop_sign(self):
-        pass 
+    	#not finished yet still have to organize in the simulation.
+        canvas = Canvas(self)
+        canvas.create_rectangle(25,25,100,75, fill = "red")
+        canvas.create_text((60,50), text="STOP")
+        canvas.create_rectangle(50,25,100,75, fill = "red")
 
     def draw_traffic_lights(self):
         pass
