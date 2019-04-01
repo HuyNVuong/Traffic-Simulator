@@ -3,6 +3,7 @@ from typing import List
 from Car import Car
 from Raw import Point, raw_map, Tiles
 from ActionListener import actionListenter
+from MapTiles import MapTiles
 
 # Map class to create a map simulation, map inherit method from GUI class from appJar
 # Map __init__ got re-implement to generate a road map right when we initilize a new map
@@ -30,6 +31,8 @@ class Map(Frame):
 				elif raw_map[y][x] == Tiles.car_left:
 					car = Car(Point(x, y), raw_map[y][x], self.city)
 					self.__cars.add(car)
+				elif raw_map[y][x] == Tiles.stop_sign:
+					MapTiles(Point(x, y), raw_map[y][x], self)
 
 	def say_hi(self):
 		print("hi there, everyone!")
