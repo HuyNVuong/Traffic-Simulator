@@ -11,6 +11,7 @@ class CommandPallete(Frame):
         self.pack(side='top')
         self._running = False
         self._ispause = False
+        self._reset = False
         self.start_time = time()
         self.create_widgets()
         
@@ -76,11 +77,7 @@ class CommandPallete(Frame):
         print("Stopped.")
 
     def reset(self):
-        if self._ispause is True or self._running is False:
-            # reset
-            pass
-        else:
-            pass
+        self._reset = True 
 
     def start_timing(self):
         # your code
