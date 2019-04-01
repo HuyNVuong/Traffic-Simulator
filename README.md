@@ -63,6 +63,9 @@ git branch -d branch_to_merge
     - Build it your self: Build your own runnable by execute ```sim_build.c```    __Note__ : Some path in ```Simulation.spec``` will need to be modified
     - Downloadable content can be found at https://cse.unl.edu/~hvuong/traffic-simulation/
 
+### Increment 5 : Coding and System Testing
+* More code, implementations added
+* `pytest` is used as a main frame for testing
 
 
 
