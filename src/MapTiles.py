@@ -15,7 +15,8 @@ class MapTiles(Canvas):
     def draw_stop_sign(self):
 		points = [[0,50],[50,0],[100,0],[150,50],[150,100], [100,150],[50,150], [0,100]]
         canvas.create_polygon(points, fill = "red")
- 	
+ 		canvas.create_text((60,50), text="STOP")
+
 
     def draw_traffic_lights(self):
         pass
