@@ -16,6 +16,10 @@ def test_raw_entities():
     '''
     Asserting if enumerated types are equal to the predefined types
     Ex:
+    >>> Tiles.wall
+    <Tiles.wall: 0>
+    >>> predef['wall']
+    0
     >>> assert Tiles.wall == predef['wall']
     '''
     assert Tiles.wall == predef['wall']
