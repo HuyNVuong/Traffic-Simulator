@@ -23,4 +23,51 @@ class MapTiles(Canvas):
 
 
     def draw_traffic_lights(self):
-        pass
+        self.master.city.create_oval(self.x * 30, self.y * 30 + 8, self.x * 30 + 16, self.y * 30 + 16, fill = "grey")
+        self.master.city.create_oval(self.x * 30, self.y * 30 + 8, self.x * 30 + 16, self.y * 30 + 16, fill = "grey")
+        self.master.city.create_oval(self.x * 30, self.y * 30 + 8, self.x * 30 + 16, self.y * 30 + 16, fill = "grey")
+
+    
+    
+    #Traffic light change functions
+    def redOn(sec):
+        t_end = time.time() + sec
+        while time.time() < t_end:
+            red = self.master.city.create_oval(self.x * 30, self.y * 30 + 8, self.x * 30 + 16, self.y * 30 + 16, fill="red")
+            tk.update()
+            time.sleep(0.05)
+
+    def redOff(sec):
+        t_end = time.time() + sec
+        while time.time() < t_end:
+            red = self.master.city.create_oval(self.x * 30, self.y * 30 + 8, self.x * 30 + 16, self.y * 30 + 16, fill="grey")
+            tk.update()
+            time.sleep(0.05)
+
+    def yellowOn(sec):
+        t_end = time.time() + sec
+        while time.time() < t_end:
+            yellow = self.master.city.create_oval(self.x * 30, self.y * 30 + 8, self.x * 30 + 16, self.y * 30 + 16, fill="yellow")
+            tk.update()
+            time.sleep(0.05)
+
+    def yellowOff(sec):
+        t_end = time.time() + sec
+        while time.time() < t_end:
+            yellow = self.master.city.create_oval(self.x * 30, self.y * 30 + 8, self.x * 30 + 16, self.y * 30 + 16, fill="grey")
+            tk.update()
+            time.sleep(0.05)
+
+    def greenOn(sec):
+        t_end = time.time() + sec
+        while time.time() < t_end:
+            green = self.master.city.create_oval(self.x * 30, self.y * 30 + 8, self.x * 30 + 16, self.y * 30 + 16, fill="green")
+            tk.update()
+            time.sleep(0.05)
+
+    def greenOff(sec):
+        t_end = time.time() + sec
+        while time.time() < t_end:
+            green = self.master.city.create_oval(self.x * 30, self.y * 30 + 8, self.x * 30 + 16, self.y * 30 + 16, fill="grey")
+            tk.update()
+            time.sleep(0.05)
