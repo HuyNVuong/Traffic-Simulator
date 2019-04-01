@@ -3,7 +3,12 @@ import pytest
 
 # class SimulationTester():
 def test_raw_map_data():
-    # Test that all the entities are there 
+    '''
+    Asserting if all the tiles are inside the map
+    Ex:
+    >>> Tiles.wall in raw_map
+    True
+    '''
     assert Tiles.wall in raw_map
     assert Tiles.road in raw_map
     assert Tiles.car_right in raw_map
@@ -20,7 +25,8 @@ def test_raw_entities():
     <Tiles.wall: 0>
     >>> predef['wall']
     0
-    >>> assert Tiles.wall == predef['wall']
+    >>> Tiles.wall == predef['wall']
+    True
     '''
     assert Tiles.wall == predef['wall']
     assert Tiles.road == predef['road']
