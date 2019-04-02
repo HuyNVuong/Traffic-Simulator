@@ -1,13 +1,14 @@
 from Simulation import Simulation
 from tkinter import Tk, Canvas, Frame, Button, Label, filedialog
 from PIL import Image, ImageTk
+from Raw import resource_path
 
  # Opening window
 class SimulationMenu(Tk):
     def __init__(self):
         super().__init__()
         self.title('Menu')
-        self.iconbitmap('C:\\Users\\vuong\\Documents\\CSCE\\cse361\\csce_361\\src\\data\\traffic.ico')
+        self.iconbitmap(resource_path('./data/traffic.ico'))
         self.create_widgets()
         
     def create_widgets(self):
