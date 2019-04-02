@@ -2,12 +2,8 @@ from tkinter import Frame, Canvas, Tk
 from typing import List
 from Car import Car
 from Raw import Point, raw_map, Tiles
-from ActionListener import actionListenter
 from MapTiles import MapTiles
-
-# Map class to create a map simulation, map inherit method from GUI class from appJar
-# Map __init__ got re-implement to generate a road map right when we initilize a new map
-
+from enum import Enum
 
 class Map(Frame):
 	def __init__(self, master=None):
@@ -17,6 +13,7 @@ class Map(Frame):
 		self.create_widgets()
 		
 	__cars = set()
+	__traffic_lights = set()
 
 	def create_widgets(self):
 		self.city = Canvas(self, width=900, height=480)
@@ -28,16 +25,18 @@ class Map(Frame):
 			for x in range(len(raw_map[y])):
 				if raw_map[y][x] == Tiles.wall:    
 					self.city.create_rectangle(x * 30, y * 30, 20 + x * 30, 20 + y * 30, outline="black", fill="#808080")
-				elif raw_map[y][x] == Tiles.car_left:
+				elif raw_map[y][x] == Tiles.car_left or raw_map[y][x] == Tiles.car_down:
 					car = Car(Point(x, y), raw_map[y][x], self.city)
 					self.__cars.add(car)
 				elif raw_map[y][x] == Tiles.stop_sign:
 					MapTiles(Point(x, y), raw_map[y][x], self)
 				elif raw_map[y][x] == Tiles.traffic_lights:
-					self.traffic_light = MapTiles(Point(x, y), raw_map[y][x], self)
-
-	def say_hi(self):
-		print("hi there, everyone!")
+					tl = MapTiles(Point(x, y), raw_map[y][x], self)
+					if (raw_map[y][x + 1] == Tiles.road and raw_map[y + 1][x] == Tiles.road) or (raw_map[y - 1][x] == Tiles.road and raw_map[y][x - 1] == Tiles.road):
+						tl.redOn() 
+					else: 
+						tl.greenOn()
+					self.__traffic_lights.add(tl)
 		
 	def draw_block(self, x, y, designated=False):
 		self.city.create_rectangle(x * 30, y * 30, 30 + x * 30, 30 + y * 30, outline="black", fill="#808080")
@@ -50,7 +49,10 @@ class Map(Frame):
 		self.__cars.add(car)
 
 	def get_cars(self) -> set():
-		return self.__cars
+		return self._Map__cars
+
+	def get_traffic_lights(self) -> set():
+		return self.__traffic_lights
 
 	def open_spot(self):
 		open_spot = []

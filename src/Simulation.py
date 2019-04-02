@@ -27,15 +27,18 @@ class Simulation(Tk):
             ## Hardcode optimal path for a car
             if counter == 60: 
                 car_tmp.turn_right()
-                self.traffic_map.traffic_light.redOn(3)
+                # self.traffic_map.traffic_light.redOn(3)
             if counter == 180: car_tmp.turn_right()
             if counter == 360: 
                 car_tmp.turn_left()
-                self.traffic_map.traffic_light.yellowOn(3)
+                # car_tmp.dx /= 2
+                # car_tmp.dy /= 2
+                # self.traffic_map.traffic_light.yellowOn(3)
             if counter == 810: car_tmp.turn_right()
             if counter == 960: 
                 car_tmp.turn_left()
-                self.traffic_map.traffic_light.greenOn(3)
+                
+                # self.traffic_map.traffic_light.greenOn(3)
             if counter == 1110: car_tmp.turn_right()
             if counter == 1140: 
                 car_tmp.turn_left()
@@ -45,6 +48,9 @@ class Simulation(Tk):
                 for car in self.traffic_map.get_cars():
                     car.turn_right()
             if self.command._ispause is not True:
+                for tl in self.traffic_map.get_traffic_lights():
+                    if counter % 60 == 0:
+                        tl.blink()
                 for car in self.traffic_map.get_cars():
                     for comp in car.get_component():
                         self.traffic_map.city.move(comp, car.dx, car.dy)
