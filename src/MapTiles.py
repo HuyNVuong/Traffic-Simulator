@@ -23,15 +23,14 @@ class MapTiles(Canvas):
         points = [[self.x * 30, self.y * 30 + 8],[self.x * 30 + 8, self.y * 30],[self.x * 30 + 16, self.y * 30],
                   [self.x * 30 + 24, self.y * 30 + 8],[self.x * 30 + 24, self.y * 30 + 16], 
                   [self.x * 30 + 16, self.y * 30 + 24],[self.x * 30 + 8, self.y * 30 + 24], [self.x * 30, self.y * 30 + 16]]
-        self.master.city.create_polygon(points, fill = "red")
-        self.master.city.create_text((self.x * 30 + 10, self.y * 30 + 10), text="STOP")
-
+        self.master.city.create_polygon(points, fill="red")
+        self.master.city.create_text((self.x * 30 + 12, self.y * 30 + 11), text="S", fill="white")
 
     def draw_traffic_lights(self):
-        self.master.city.create_rectangle(self.x * 30 , self.y * 30 - 5, self.x * 30 + 20, self.y * 30 + 35, fill="black")
-        self.master.city.create_oval(self.x * 30 + 5, self.y * 30, self.x * 30 + 15, self.y * 30 + 10, fill="grey")
-        self.master.city.create_oval(self.x * 30 + 5, self.y * 30 + 11, self.x * 30 + 15, self.y * 30 + 21, fill="grey")
-        self.master.city.create_oval(self.x * 30 + 5, self.y * 30 + 22, self.x * 30 + 15, self.y * 30 + 32, fill="grey")
+        self.master.city.create_rectangle(self.x * 30 + 2, self.y * 30 - 3, self.x * 30 + 18, self.y * 30 + 27, fill="black")
+        self.master.city.create_oval(self.x * 30 + 5, self.y * 30 - 3, self.x * 30 + 15, self.y * 30 + 7, fill="grey")
+        self.master.city.create_oval(self.x * 30 + 5, self.y * 30 + 7, self.x * 30 + 15, self.y * 30 + 17, fill="grey")
+        self.master.city.create_oval(self.x * 30 + 5, self.y * 30 + 17, self.x * 30 + 15, self.y * 30 + 27, fill="grey")
 
     
 
@@ -39,41 +38,41 @@ class MapTiles(Canvas):
     def redOn(self, sec):
         t_end = time.time() + sec
         while time.time() < t_end:
-            red = self.master.city.create_oval(self.x * 30 + 5, self.y * 30, self.x * 30 + 15, self.y * 30 + 10, fill="red")
+            red = self.master.city.create_oval(self.x * 30 + 5, self.y * 30 - 3, self.x * 30 + 15, self.y * 30 + 7, fill="red")
             self.master.update()
             time.sleep(0.05)
 
     def redOff(self, sec):
         t_end = time.time() + sec
         while time.time() < t_end:
-            red = self.master.city.create_oval(self.x * 30, self.y * 30 + 8, self.x * 30 + 16, self.y * 30 + 16, fill="grey")
+            red = self.master.city.create_oval(self.x * 30 + 5, self.y * 30 - 3, self.x * 30 + 15, self.y * 30 + 7, fill="grey")
             self.master.update()
             time.sleep(0.05)
 
     def yellowOn(self, sec):
         t_end = time.time() + sec
         while time.time() < t_end:
-            yellow = self.master.city.create_oval(self.x * 30 + 5, self.y * 30 + 11, self.x * 30 + 15, self.y * 30 + 21, fill="yellow")
+            yellow = self.master.city.create_oval(self.x * 30 + 5, self.y * 30 + 7, self.x * 30 + 15, self.y * 30 + 17, fill="yellow")
             self.master.update()
             time.sleep(0.05)
 
     def yellowOff(self, sec):
         t_end = time.time() + sec
         while time.time() < t_end:
-            yellow = self.master.city.create_oval(self.x * 30, self.y * 30 + 8, self.x * 30 + 16, self.y * 30 + 16, fill="grey")
+            yellow = self.master.city.create_oval(self.x * 30 + 5, self.y * 30 + 7, self.x * 30 + 15, self.y * 30 + 17, fill="grey")
             self.master.update()
             time.sleep(0.05)
 
     def greenOn(self, sec):
         t_end = time.time() + sec
         while time.time() < t_end:
-            green = self.master.city.create_oval(self.x * 30 + 5, self.y * 30 + 22, self.x * 30 + 15, self.y * 30 + 32, fill="green")
+            green = self.master.city.create_oval(self.x * 30 + 5, self.y * 30 + 17, self.x * 30 + 15, self.y * 30 + 27, fill="green")
             self.master.update()
             time.sleep(0.05)
 
     def greenOff(self, sec):
         t_end = time.time() + sec
         while time.time() < t_end:
-            green = self.master.city.create_oval(self.x * 30, self.y * 30 + 8, self.x * 30 + 16, self.y * 30 + 16, fill="grey")
+            green = self.master.city.create_oval(self.x * 30 + 5, self.y * 30 + 17, self.x * 30 + 15, self.y * 30 + 27, fill="grey")
             self.master.update()
             time.sleep(0.05)
