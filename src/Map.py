@@ -1,5 +1,5 @@
 from tkinter import Frame, Canvas, Tk
-from typing import List
+from typing import List # Optional
 from Car import Car
 from Raw import Point, raw_map, Tiles
 from MapTiles import MapTiles
@@ -53,6 +53,14 @@ class Map(Frame):
 
 	def get_traffic_lights(self) -> set():
 		return self.__traffic_lights
+
+	''' 
+	This function returns an {maybe} optimal path of a car from 
+	point A to point B
+	>>> optimal_path(car)
+	'''
+	def optimal_path(self, car : Car): # -> Optionnal[List[Point]]
+		pass
 
 	def open_spot(self):
 		open_spot = []

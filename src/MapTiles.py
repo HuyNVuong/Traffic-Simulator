@@ -21,7 +21,7 @@ class MapTiles(Canvas):
             self.draw_stop_sign()
         elif state == Tiles.traffic_lights:
             self.draw_traffic_lights()
-        self.light = LightT.none
+            self.light = LightT.none
 
 
     def __repr__(self):
