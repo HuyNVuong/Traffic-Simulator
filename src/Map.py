@@ -15,6 +15,7 @@ class Map(Frame):
 		
 	__cars = set()
 	__traffic_lights = set()
+	__dest = set()
 	__walls = set()
 
 	def create_widgets(self):
@@ -40,6 +41,9 @@ class Map(Frame):
 					else: 
 						tl.greenOn()
 					self.__traffic_lights.add(tl)
+				elif raw_map[y][x] == Tiles.dest:
+					t2=MapTiles(Point(x, y), raw_map[y][x], self)
+					self.__dest.add(t2)
 		
 	def draw_block(self, x, y, designated=False):
 		self.city.create_rectangle(x * 30, y * 30, 30 + x * 30, 30 + y * 30, outline="black", fill="#808080")
@@ -56,6 +60,7 @@ class Map(Frame):
 
 	def get_traffic_lights(self) -> set():
 		return self.__traffic_lights
+
 
 	''' 
 	This function returns an {maybe} optimal path of a car from 

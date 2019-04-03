@@ -1,6 +1,7 @@
 from tkinter import Canvas 
 from Raw import Point, Tiles
-import time 
+import time
+import random
 from enum import Enum
 
 class LightT(Enum):
@@ -22,6 +23,9 @@ class MapTiles(Canvas):
         elif state == Tiles.traffic_lights:
             self.draw_traffic_lights()
             self.light = LightT.none
+        elif state == Tiles.dest:
+            self.draw_dest_point()
+    
 
 
     def __repr__(self):
@@ -39,7 +43,11 @@ class MapTiles(Canvas):
         self.master.city.create_oval(self.x * 30 + 5, self.y * 30 - 3, self.x * 30 + 15, self.y * 30 + 7, fill="grey")
         self.master.city.create_oval(self.x * 30 + 5, self.y * 30 + 7, self.x * 30 + 15, self.y * 30 + 17, fill="grey")
         self.master.city.create_oval(self.x * 30 + 5, self.y * 30 + 17, self.x * 30 + 15, self.y * 30 + 27, fill="grey")
-
+    
+    def draw_dest_point(self):
+        colors=["red", "orange", "yellow", "green", "blue", "indigo", "violet"]
+        self.master.city.create_arc(self.x * 30 + 1, self.y * 30 + 40, self.x * 30 + 20, self.y * 30, start=0, extent=180, fill=random.choice(colors))
+        self.master.city.create_text((self.x * 30 + 12, self.y * 30 + 11), text="A", fill="white")
     def blink(self):
         if self.light == LightT.red: 
             self.greenOn()
