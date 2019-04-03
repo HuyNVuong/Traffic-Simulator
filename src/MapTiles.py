@@ -48,6 +48,7 @@ class MapTiles(Canvas):
         colors=["red", "orange", "yellow", "green", "blue", "indigo", "violet"]
         self.master.city.create_arc(self.x * 30 + 1, self.y * 30 + 40, self.x * 30 + 20, self.y * 30, start=0, extent=180, fill=random.choice(colors))
         self.master.city.create_text((self.x * 30 + 12, self.y * 30 + 11), text="A", fill="white")
+        
     def blink(self):
         if self.light == LightT.red: 
             self.greenOn()

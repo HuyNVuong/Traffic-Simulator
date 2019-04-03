@@ -21,11 +21,6 @@ class Map(Frame):
 		self.master = master 
 		self.pack(side='bottom')
 		self.create_widgets()
-		
-	__cars = set()
-	__traffic_lights = set()
-	__dest = set()
-	__walls = set()
 
 	def create_widgets(self):
 		self.city = Canvas(self, width=900, height=480)
@@ -40,6 +35,7 @@ class Map(Frame):
 					self._Map__walls.add(Point(x, y))
 				elif raw_map[y][x] == Tiles.car_left or raw_map[y][x] == Tiles.car_down \
 					or raw_map[y][x] == Tiles.car_right or raw_map[y][x] == Tiles.car_up:
+			
 					car = Car(Point(x, y), raw_map[y][x], self.city)
 					car_dest = random.sample(self._Map__open_spot, 1)[0]
 					self._Map__open_spot.remove(car_dest)
@@ -55,9 +51,9 @@ class Map(Frame):
 					else: 
 						tl.greenOn()
 					self.__traffic_lights.add(tl)
-				elif raw_map[y][x] == Tiles.dest:
-					t2=MapTiles(Point(x, y), raw_map[y][x], self)
-					self.__dest.add(t2)
+				# elif raw_map[y][x] == Tiles.dest:
+				# 	t2=MapTiles(Point(x, y), raw_map[y][x], self)
+				# 	self.__dest.add(t2)
 		
 	def draw_block(self, x, y, designated=False):
 		self.city.create_rectangle(x * 30, y * 30, 30 + x * 30, 30 + y * 30, outline="black", fill="#808080")
