@@ -33,6 +33,9 @@ class Simulation(Tk):
             self.update()
         while self.command._running is True:
             if self.command._ispause is not True:
+                if counter % 90 == 0:
+                    for tl in self.traffic_map.get_traffic_lights():
+                        tl.blink()
                 if counter % 30 == 0: 
                     for car, path in car_w_path.items():
                         if len(path) > 1:
