@@ -76,6 +76,8 @@ class Map(Frame):
 	def get_traffic_lights(self) -> set():
 		return self.__traffic_lights
 
+	def get_open_spot(self):
+		return self._Map__open_spot
 
 	''' 
 	This function returns an {maybe} optimal path of a car from 
@@ -94,19 +96,24 @@ class Map(Frame):
 		if car.dest is None:
 			return None
 
+		
+
 		# Occupied spaces, or visited vertex
 		stop_signs = {Point(x, y)
 						for y, row in enumerate(raw_map)
 							for x, spot in enumerate(row) if spot == Tiles.stop_sign}
 
-		off_limits = self._Map__walls | {t.pos for t in self._Map__traffic_lights} | ( {c.pos for c in self._Map__cars} ^ {car.pos} ) | stop_signs
-
+		off_limits = (self._Map__walls | {t.pos for t in self._Map__traffic_lights} | {c.pos for c in self._Map__cars} | stop_signs)
+		if car.pos in off_limits:
+			off_limits.remove(car.pos)
 		# Fancier way to do this : we stop at the point before the beacon
 		# targets = set() 
 		# if car.dest not in off_limits:
 		# 	targets = {p for p in car.dest.neighbors() if p not in off_limits} 
 		# else:
 		# 	return None
+		if car.dest in off_limits:
+			return None
 
 		result = []
 		best = None 
@@ -127,6 +134,8 @@ class Map(Frame):
 					continue
 				heapq.heappush(queue, (distance + 1, path + [neig]))
 		return result[0]
+
+	
 
 	
 
