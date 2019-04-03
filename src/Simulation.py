@@ -18,7 +18,8 @@ class Simulation(Tk):
     def create_widgets(self):
         self.command = CommandPallete(self)
         self.traffic_map = Map(self)
-        car_tmp = Car(Point(3, 4), Tiles.car_up, master=self.traffic_map.city)
+        car_tmp = Car(Point(3, 4), Tiles.car_up, master=self.traffic_map.city, dest=Point(27, 14))
+        print(self.traffic_map.optimal_path(car_tmp))
         counter = 0
         while self.command._running is not True:
             self.command.update()

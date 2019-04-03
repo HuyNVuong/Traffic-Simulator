@@ -8,6 +8,17 @@ class Point(NamedTuple):
     x : int
     y : int
 
+    def __repr__(self):
+        return f"Point ({self.x}, {self.y})"
+
+    def neighbors(self):
+        x, y = self.x, self.y 
+        yield from [Point(x - 1, y), Point(x + 1, y), 
+                    Point (x, y - 1), Point(x, y + 1)]
+
+    def manhattan(self, other) -> int:
+        return abs(self.x - other.x) + abs(self.y - other.y)
+
 class Tiles(IntEnum):
     wall = 0
     road = 1

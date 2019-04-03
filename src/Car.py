@@ -4,12 +4,14 @@ from Raw import Point, Tiles
 
 class Car(Canvas):
     
-    def __init__(self, coordinate : Point, state : Tiles, master=None):
+    def __init__(self, coordinate : Point, state : Tiles, master=None, dest=None):
         super().__init__(master)
         self.x = coordinate.x
         self.y = coordinate.y
+        self.pos = coordinate
         self.master = master
         self.state = state
+        self.dest = dest
         self.__component = []
         if self.state == Tiles.car_left :
             self.draw_car_horizontal()
