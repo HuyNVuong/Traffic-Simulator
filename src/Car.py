@@ -4,7 +4,7 @@ from Raw import Point, Tiles
 
 class Car(Canvas):
     
-    def __init__(self, coordinate : Point, state : Tiles, master=None, dest=None, color='yellow'):
+    def __init__(self, coordinate : Point, state : Tiles, master=None, dest=None, body='yellow'):
         super().__init__(master)
         self.x = coordinate.x
         self.y = coordinate.y
@@ -12,7 +12,7 @@ class Car(Canvas):
         self.master = master
         self.state = state
         self.dest = dest
-        self.color = color
+        self.color = body
         self.__component = []
         if self.state == Tiles.car_left :
             self.draw_car_horizontal()

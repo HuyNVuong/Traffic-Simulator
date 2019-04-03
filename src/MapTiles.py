@@ -44,9 +44,8 @@ class MapTiles(Canvas):
         self.master.city.create_oval(self.x * 30 + 5, self.y * 30 + 7, self.x * 30 + 15, self.y * 30 + 17, fill="grey")
         self.master.city.create_oval(self.x * 30 + 5, self.y * 30 + 17, self.x * 30 + 15, self.y * 30 + 27, fill="grey")
     
-    def draw_dest_point(self):
-        colors=["red", "orange", "yellow", "green", "blue", "indigo", "violet"]
-        self.master.city.create_arc(self.x * 30 + 1, self.y * 30 + 40, self.x * 30 + 20, self.y * 30, start=0, extent=180, fill=random.choice(colors))
+    def draw_dest_point(self, color):
+        self.master.city.create_arc(self.x * 30 + 1, self.y * 30 + 40, self.x * 30 + 20, self.y * 30, start=0, extent=180, fill=color)
         self.master.city.create_text((self.x * 30 + 12, self.y * 30 + 11), text="A", fill="white")
         
     def blink(self):

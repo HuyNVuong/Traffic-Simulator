@@ -7,6 +7,8 @@ from enum import Enum
 import heapq
 import random
 
+colors = ["orange", "yellow", "green", "blue", "indigo", "violet"]
+
 class Map(Frame):
 
 	__cars = set()
@@ -33,16 +35,21 @@ class Map(Frame):
 				if raw_map[y][x] == Tiles.wall:    
 					self.city.create_rectangle(x * 30, y * 30, 20 + x * 30, 20 + y * 30, outline="black", fill="#808080")
 					self._Map__walls.add(Point(x, y))
+
 				elif raw_map[y][x] == Tiles.car_left or raw_map[y][x] == Tiles.car_down \
 					or raw_map[y][x] == Tiles.car_right or raw_map[y][x] == Tiles.car_up:
-			
-					car = Car(Point(x, y), raw_map[y][x], self.city)
+					color = random.choice(colors)
+					car = Car(Point(x, y), raw_map[y][x], self.city, color, body=color)
 					car_dest = random.sample(self._Map__open_spot, 1)[0]
+					self.city.create_arc(car_dest.x * 30 + 1, car_dest.y * 30 + 40, car_dest.x * 30 + 20, car_dest.y * 30, start=0, extent=180, fill=color)
+					self.city.create_text((car_dest.x * 30 + 12, car_dest.y * 30 + 11), text="A", fill="white")
 					self._Map__open_spot.remove(car_dest)
 					car.dest = car_dest
 					self.__cars.add(car)
+
 				elif raw_map[y][x] == Tiles.stop_sign:
 					MapTiles(Point(x, y), raw_map[y][x], self)
+					
 				elif raw_map[y][x] == Tiles.traffic_lights:
 					tl = MapTiles(Point(x, y), raw_map[y][x], self)
 					if (raw_map[y][x + 1] == Tiles.road and raw_map[y + 1][x] == Tiles.road) \
@@ -51,9 +58,6 @@ class Map(Frame):
 					else: 
 						tl.greenOn()
 					self.__traffic_lights.add(tl)
-				# elif raw_map[y][x] == Tiles.dest:
-				# 	t2=MapTiles(Point(x, y), raw_map[y][x], self)
-				# 	self.__dest.add(t2)
 		
 	def draw_block(self, x, y, designated=False):
 		self.city.create_rectangle(x * 30, y * 30, 30 + x * 30, 30 + y * 30, outline="black", fill="#808080")
