@@ -39,6 +39,7 @@ class Map(Frame):
 				elif raw_map[y][x] == Tiles.car_left or raw_map[y][x] == Tiles.car_down \
 					or raw_map[y][x] == Tiles.car_right or raw_map[y][x] == Tiles.car_up:
 					color = random.choice(colors)
+					colors.remove(color)
 					car = Car(Point(x, y), raw_map[y][x], self.city, color, body=color)
 					car_dest = random.sample(self._Map__open_spot, 1)[0]
 					self.city.create_arc(car_dest.x * 30 + 1, car_dest.y * 30 + 40, car_dest.x * 30 + 20, car_dest.y * 30, start=0, extent=180, fill=color)
@@ -94,7 +95,7 @@ class Map(Frame):
 			return None
 
 		# Occupied spaces, or visited vertex
-		off_limits = self._Map__walls | ( {c.pos for c in self._Map__cars} ^ {car.pos} ) 
+		off_limits = self._Map__walls | {t.pos for t in self._Map__traffic_lights} | ( {c.pos for c in self._Map__cars} ^ {car.pos} ) 
 
 		# Fancier way to do this : we stop at the point before the beacon
 		# targets = set() 

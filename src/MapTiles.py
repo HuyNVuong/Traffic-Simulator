@@ -18,15 +18,12 @@ class MapTiles(Canvas):
         self.state = state 
         self.x = coordinate.x
         self.y = coordinate.y
+        self.pos = coordinate
         if state == Tiles.stop_sign:
             self.draw_stop_sign()
         elif state == Tiles.traffic_lights:
             self.draw_traffic_lights()
             self.light = LightT.none
-        elif state == Tiles.dest:
-            self.draw_dest_point()
-    
-
 
     def __repr__(self):
         return 'Tiles'
