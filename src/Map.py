@@ -5,17 +5,22 @@ from Raw import Point, raw_map, Tiles
 from MapTiles import MapTiles
 from enum import Enum
 import heapq
+import random
 
 class Map(Frame):
+
+	__cars = set()
+	__traffic_lights = set()
+	__walls = set()
+	__open_spot = {Point(x, y)
+		for y, row in enumerate(raw_map)
+			for x, spot in enumerate(row) if spot == 1}
+
 	def __init__(self, master=None):
 		super().__init__(master, width=900, height=540)
 		self.master = master 
 		self.pack(side='bottom')
 		self.create_widgets()
-		
-	__cars = set()
-	__traffic_lights = set()
-	__walls = set()
 
 	def create_widgets(self):
 		self.city = Canvas(self, width=900, height=480)
@@ -28,14 +33,19 @@ class Map(Frame):
 				if raw_map[y][x] == Tiles.wall:    
 					self.city.create_rectangle(x * 30, y * 30, 20 + x * 30, 20 + y * 30, outline="black", fill="#808080")
 					self._Map__walls.add(Point(x, y))
-				elif raw_map[y][x] == Tiles.car_left or raw_map[y][x] == Tiles.car_down:
+				elif raw_map[y][x] == Tiles.car_left or raw_map[y][x] == Tiles.car_down \
+					or raw_map[y][x] == Tiles.car_right or raw_map[y][x] == Tiles.car_up:
 					car = Car(Point(x, y), raw_map[y][x], self.city)
+					car_dest = random.sample(self._Map__open_spot, 1)[0]
+					self._Map__open_spot.remove(car_dest)
+					car.dest = car_dest
 					self.__cars.add(car)
 				elif raw_map[y][x] == Tiles.stop_sign:
 					MapTiles(Point(x, y), raw_map[y][x], self)
 				elif raw_map[y][x] == Tiles.traffic_lights:
 					tl = MapTiles(Point(x, y), raw_map[y][x], self)
-					if (raw_map[y][x + 1] == Tiles.road and raw_map[y + 1][x] == Tiles.road) or (raw_map[y - 1][x] == Tiles.road and raw_map[y][x - 1] == Tiles.road):
+					if (raw_map[y][x + 1] == Tiles.road and raw_map[y + 1][x] == Tiles.road) \
+						or (raw_map[y - 1][x] == Tiles.road and raw_map[y][x - 1] == Tiles.road):
 						tl.redOn() 
 					else: 
 						tl.greenOn()
@@ -61,8 +71,13 @@ class Map(Frame):
 	This function returns an {maybe} optimal path of a car from 
 	point A to point B
 	it uses a method of breath first search (BFS)
-	>>> optimal_path(car)
-	List[Point]
+
+	>>> optimal_path(car, Point(3, 4), Tiles.car_up, dest=Point(5, 7))
+	[Point(3, 4), Point(3, 5), Point(3, 6), Point(3, 7), Point(4, 7), Point(5, 7)]
+
+	Return None if the dest is occupied or unreachable by the car
+	>>> optimal_path(car, Point(3, 4), Tiles.car_up, dest=Point(10, 0))
+	None
 	'''
 	def optimal_path(self, car : Car): # -> Optional[List[Point]]
 		# If destination is not specified
@@ -70,13 +85,14 @@ class Map(Frame):
 			return None
 
 		# Occupied spaces, or visited vertex
-		off_limits = self._Map__walls | {c.pos for c in self._Map__cars}
-		targets = set()
+		off_limits = self._Map__walls | ( {c.pos for c in self._Map__cars} ^ {car.pos} ) 
 
-		if car.dest not in off_limits:
-			targets = {p for p in car.dest.neighbors()} 
-		else:
-			return None
+		# Fancier way to do this : we stop at the point before the beacon
+		# targets = set() 
+		# if car.dest not in off_limits:
+		# 	targets = {p for p in car.dest.neighbors() if p not in off_limits} 
+		# else:
+		# 	return None
 
 		result = []
 		best = None 
@@ -84,9 +100,9 @@ class Map(Frame):
 		while queue: 
 			distance, path = heapq.heappop(queue)
 			if best and len(path) > best:
-				return result 
+				return result[0]
 			node = path[-1] # -> pop off last element of path
-			if node in targets:
+			if node == car.dest:
 				result.append(path)
 				best = len(path)
 			if node in off_limits:
@@ -96,15 +112,9 @@ class Map(Frame):
 				if neig in off_limits:
 					continue
 				heapq.heappush(queue, (distance + 1, path + [neig]))
-		return result
+		return result[0]
 
-	def open_spot(self):
-		open_spot = []
-		for y, row in enumerate(raw_map):
-			for x, spot in enumerate(row):
-				if spot == 1:
-					open_spot.append(Point(x, y))
-		return open_spot
+	
 
 
 
