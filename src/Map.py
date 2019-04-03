@@ -16,7 +16,7 @@ class Map(Frame):
 	__walls = set()
 	__open_spot = {Point(x, y)
 		for y, row in enumerate(raw_map)
-			for x, spot in enumerate(row) if spot == 1}
+			for x, spot in enumerate(row) if spot == Tiles.road}
 
 	def __init__(self, master=None):
 		super().__init__(master, width=900, height=540)
@@ -95,6 +95,10 @@ class Map(Frame):
 			return None
 
 		# Occupied spaces, or visited vertex
+		stop_signs = {Point(x, y)
+						for y, row in enumerate(raw_map)
+							for x, spot in enumerate(row) if spot == Tiles.stop_sign}
+
 		off_limits = self._Map__walls | {t.pos for t in self._Map__traffic_lights} | ( {c.pos for c in self._Map__cars} ^ {car.pos} ) 
 
 		# Fancier way to do this : we stop at the point before the beacon
