@@ -66,6 +66,7 @@ git branch -d branch_to_merge
 ### Increment 5 : Coding and System Testing
 * More code, implementations added
 * `pytest` is used as a main frame for testing
+* Modified __Breath First Search (BFS)__ is used to implement car path finding. Algorithm implementation is in `Map.optimal_path()`
 
 
 
