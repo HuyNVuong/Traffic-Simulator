@@ -99,7 +99,7 @@ class Map(Frame):
 						for y, row in enumerate(raw_map)
 							for x, spot in enumerate(row) if spot == Tiles.stop_sign}
 
-		off_limits = self._Map__walls | {t.pos for t in self._Map__traffic_lights} | ( {c.pos for c in self._Map__cars} ^ {car.pos} ) 
+		off_limits = self._Map__walls | {t.pos for t in self._Map__traffic_lights} | ( {c.pos for c in self._Map__cars} ^ {car.pos} ) | stop_signs
 
 		# Fancier way to do this : we stop at the point before the beacon
 		# targets = set() 
