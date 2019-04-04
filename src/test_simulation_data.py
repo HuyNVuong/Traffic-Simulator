@@ -69,6 +69,13 @@ def test_short_path():
     expected_path2 = None
     assert expected_path2 is None
 
+    car.pos = Point(5,8)
+    car.dest = Point(3,6)
+    car.state = Tiles.car_left
+    expected_path3 = [Point(5,8), Point(4,8), Point(3,8), Point(3,7), Point(3,6)]
+    m.optimal_path(car)
+    assert expected_path3 == m.optimal_path(car)
+
 def test_turning():
     '''
     Asserting if a car object turns left and updates its state correctly 
@@ -82,6 +89,26 @@ def test_turning():
     assert car.dx == 0
     assert car.dy == 1
     assert car.state == Tiles.car_down
+    assert car.pos == Point(5,8)
+
+    car.turn_right()
+    assert car.dx == -1
+    assert car.dy == 0
+    assert car.state == Tiles.car_left
+    assert car.pos == Point(5,8)
+
+    car.turn_right()
+    assert car.dx == 0
+    assert car.dy == -1
+    assert car.state == Tiles.car_up
+    assert car.pos == Point(5,8)
+
+    car.turn_left()
+    car.turn_left()
+    car.turn_left()
+    assert car.dx == 1
+    assert car.dy == 0
+    assert car.state == Tiles.car_right
     assert car.pos == Point(5,8)
 
 
