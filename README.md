@@ -67,7 +67,7 @@ git branch -d branch_to_merge
 * More code, implementations added
 * `pytest` is used as a main frame for testing
 * Modified __Breath First Search (BFS)__ is used to implement car path finding. Algorithm implementation is in `Map.optimal_path()`
-* To run pytest : `py.test -v --doctest-modules test\_simulation\_data.py `
+* To run pytest : `py.test -v --doctest-modules test_simulation_data.py `
     - `-v` : A more verbose output
     - `--doctest-modules` : BONUS, flags for doctest in Python
 
