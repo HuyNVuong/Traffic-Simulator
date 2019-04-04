@@ -23,7 +23,7 @@ class Car(Canvas):
         self.update_speed()
 
     def __repr__(self):
-        return 'Car : (x : {}, y : {}, dx : {}, dy : {}'.format(self.x, self.y, self.dx, self.dy)
+        return f'Car(x:{self.x}, y:{self.y}, state:{self.state}, master:{self.master}, dest:{self.dest}, color:{self.color})'
 
     def update_speed(self):
         if self.state == Tiles.car_down:
