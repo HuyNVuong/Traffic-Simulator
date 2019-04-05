@@ -26,7 +26,7 @@ class Simulation(Tk):
             car.dx, car.dy = path[1].x - path[0].x, path[1].y - path[0].y
             car.update_state()
             car_w_path[car] = path
-            print(car, path)
+            # print(car, path)
         counter = 0
         while self.command._running is not True:
             self.command.update()
@@ -43,12 +43,17 @@ class Simulation(Tk):
                             car.update_state()
                             path.pop(0)
                         else:
-                            car.dx, car.dy = 0, 0
+                            car.stop()
                 for car in car_w_path.keys():
+                    # for head in car.head():
+                        # print(head, raw_map[int(head.y)][int(head.x)])
+                        # if raw_map[int(head.y)][int(head.x)] == Tiles.stop_sign:
+                        #     car.dx, car.dy = 0, 0
                     for comp in car.get_component():
                         self.traffic_map.city.move(comp, car.dx, car.dy)
-                    car.x += car.dx / 30
-                    car.y += car.dy / 30
+                    if counter % 30 == 0:
+                        car.x += car.dx 
+                        car.y += car.dy 
                 counter += 1
             sleep(0.01)
             
