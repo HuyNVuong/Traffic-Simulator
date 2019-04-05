@@ -54,14 +54,6 @@ def resource_path(relative_path) -> str:
 
     return base_path + relative_path
 
-def fromCSV(file_path : str):
-    with open(file_path) as file:
-        raw_data = [line.strip().split(',') for line in file]
-    return array(raw_data)
-
-def toCSV(data : List[List[int]]) -> bool:
-    return False
-
 # Initial map for adhoc testing
 raw_map =  array([[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
                   [0, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0],
@@ -80,8 +72,19 @@ raw_map =  array([[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
                   [0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0],
                   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]])
 
-        
 
+def fromCSV(file_path : str):
+    with open(file_path) as file:
+        # raw_data = array([predef[e.lower()] for e in 
+        #                  line.strip().split(',') for line in file])
+        raw_data = []
+        for line in file:
+            row = []
+            for e in line.strip().split(','):
+                row.append( predef[e.lower()])
+            raw_data.append(row)
+    return array(raw_data)
 
-
+def toCSV(data : List[List[int]]) -> bool:
+    return False
 

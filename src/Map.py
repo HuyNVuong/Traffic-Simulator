@@ -1,7 +1,7 @@
 from tkinter import Frame, Canvas, Tk
 from typing import List # Optional
 from Car import Car
-from Raw import Point, raw_map, Tiles
+from Raw import Point, raw_map, Tiles, fromCSV
 from MapTiles import MapTiles
 from enum import Enum
 import heapq
@@ -30,6 +30,7 @@ class Map(Frame):
 		self.city.pack()
 
 	def paint(self):
+		# raw_map = fromCSV('./data/Map01.csv')
 		for y in range(len(raw_map)):
 			for x in range(len(raw_map[y])):
 				if raw_map[y][x] == Tiles.wall:    
@@ -95,8 +96,6 @@ class Map(Frame):
 		# If destination is not specified
 		if car.dest is None:
 			return None
-
-		
 
 		# Occupied spaces, or visited vertex
 		stop_signs = {Point(x, y)
