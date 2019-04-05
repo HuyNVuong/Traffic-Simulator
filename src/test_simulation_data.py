@@ -111,4 +111,12 @@ def test_turning():
     assert car.state == Tiles.car_right
     assert car.pos == Point(5,8)
 
+def test_update_state():
+    car = Car(Point(5,8), Tiles.car_left)
+    car.state = Tiles.car_right
+    car.update_speed()
+    # car.update_state()
+    assert car.state == Tiles.car_right
+    assert car.dx == 1
+    assert car.dy == 0
 
