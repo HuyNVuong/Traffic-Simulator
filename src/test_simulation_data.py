@@ -50,11 +50,11 @@ def test_car_creation():
     assert car.dest == None
 
     car1 = Car(Point(5,8), Tiles.car_left, dest=Point(7,8), body="green")
-    assert car.master is None
-    assert car.dx == -1
-    assert car.dy == 0
-    assert car.color == "green" #TODO figure out how to change color
-    assert car.dest == Point(7,8)
+    assert car1.master is None
+    assert car1.dx == -1
+    assert car1.dy == 0
+    assert car1.color == "green" #TODO figure out how to change color
+    assert car1.dest == Point(7,8)
 
 def test_short_path():
     m = Map()
@@ -111,4 +111,12 @@ def test_turning():
     assert car.state == Tiles.car_right
     assert car.pos == Point(5,8)
 
+def test_update_state():
+    car = Car(Point(5,8), Tiles.car_left)
+    car.state = Tiles.car_right
+    car.update_speed()
+    # car.update_state()
+    assert car.state == Tiles.car_right
+    assert car.dx == 1
+    assert car.dy == 0
 
