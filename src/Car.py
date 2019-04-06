@@ -13,6 +13,7 @@ class Car(Canvas):
         self.state = state
         self.dest = dest
         self.color = body
+        self.count = 0
         self.__component = []
         if self.state == Tiles.car_left :
             self.draw_car_horizontal()
@@ -107,4 +108,13 @@ class Car(Canvas):
 
     def stop(self):
         self.dx, self.dy = 0, 0
+
+    def stop_for_three_step(self) -> bool:
+        if self.count == 2:
+            self.count = 0
+            return False
+        else:
+            self.count += 1 
+            self.dx, self.dy = 0, 0
+            return True
     

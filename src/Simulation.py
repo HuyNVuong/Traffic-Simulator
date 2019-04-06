@@ -38,18 +38,16 @@ class Simulation(Tk):
                     for tl in self.traffic_map.get_traffic_lights():
                         tl.blink()
                 if counter % 30 == 0: 
-                    for car, path in car_w_path.items():
-                        
+                    for car, path in car_w_path.items():              
                         if Tiles.stop_sign in car.neighbors():
-                            car.dx, car.dy = 0, 0
-                            continue
+                            if car.stop_for_three_step():
+                                continue
                         update = True
                         for tl in self.traffic_map.get_traffic_lights():
-                           
                             if tl.pos in car.pos.neighbors():
-                                print(tl.pos, car.pos.neighbors(), tl.light)
+                                # print(tl.pos, car.pos.neighbors(), tl.light)
                                 if tl.light == LightT.red: # LightT.red 
-                                    print('Red')
+                                    # print('Red')
                                     car.dx, car.dy = 0, 0
                                     update = False
                                     break
