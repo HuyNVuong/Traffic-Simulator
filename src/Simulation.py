@@ -7,6 +7,7 @@ from CommandPallete import CommandPallete
 from tkinter import Tk, Frame, Label, Button
 from time import sleep
 from PIL import Image, ImageTk
+from MapTiles import LightT
 
 class Simulation(Tk):
     def __init__(self):
@@ -37,7 +38,21 @@ class Simulation(Tk):
                     for tl in self.traffic_map.get_traffic_lights():
                         tl.blink()
                 if counter % 30 == 0: 
-                    for car, path in car_w_path.items():
+                    for car, path in car_w_path.items():              
+                        if Tiles.stop_sign in car.neighbors():
+                            if car.stop_for_three_step():
+                                continue
+                        update = True
+                        for tl in self.traffic_map.get_traffic_lights():
+                            if tl.pos in car.pos.neighbors():
+                                # print(tl.pos, car.pos.neighbors(), tl.light)
+                                if tl.light == LightT.red: # LightT.red 
+                                    # print('Red')
+                                    car.dx, car.dy = 0, 0
+                                    update = False
+                                    break
+                        if not update:
+                            continue
                         if len(path) > 1:
                             car.dx, car.dy = path[1].x - path[0].x, path[1].y - path[0].y
                             car.update_state()
@@ -54,6 +69,7 @@ class Simulation(Tk):
                     if counter % 30 == 0:
                         car.x += car.dx 
                         car.y += car.dy 
+                        car.pos = Point(car.x, car.y)
                 counter += 1
             sleep(0.01)
             
@@ -62,3 +78,6 @@ class Simulation(Tk):
             self.update()
 
 
+if __name__ == "__main__":
+    s = Simulation()
+    s.mainloop()

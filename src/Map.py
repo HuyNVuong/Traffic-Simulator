@@ -1,13 +1,16 @@
 from tkinter import Frame, Canvas, Tk
 from typing import List # Optional
 from Car import Car
-from Raw import Point, raw_map, Tiles
+from Raw import Point, raw_map, Tiles, fromCSV
 from MapTiles import MapTiles
 from enum import Enum
 import heapq
 import random
 
-colors = ["orange", "yellow", "green", "blue", "indigo", "violet"]
+colors = ['#C7980A', '#F4651F', '#CC3A05', '#575E76', '#156943', '#0BD055', '#ACD338']
+block_colors_0 = ['#498B62', '#369058', '#1FD464', '#137D3B']
+block_colors_1 = ['#C7980A', '#F4651F', '#82D8A7', '#CC3A05', '#575E76', '#156943', '#0BD055', '#ACD338']
+block_colors = [block_colors_0, block_colors_1]
 
 class Map(Frame):
 
@@ -22,6 +25,7 @@ class Map(Frame):
 		super().__init__(master, width=900, height=540)
 		self.master = master 
 		self.pack(side='bottom')
+		self.sprites = random.choice(block_colors)
 		self.create_widgets()
 
 	def create_widgets(self):
@@ -30,10 +34,11 @@ class Map(Frame):
 		self.city.pack()
 
 	def paint(self):
+		# raw_map = fromCSV('./data/Map01.csv')
 		for y in range(len(raw_map)):
 			for x in range(len(raw_map[y])):
 				if raw_map[y][x] == Tiles.wall:    
-					self.city.create_rectangle(x * 30, y * 30, 20 + x * 30, 20 + y * 30, outline="black", fill="#808080")
+					self.city.create_rectangle(x * 30, y * 30, 20 + x * 30, 20 + y * 30, outline="black", fill=random.choice(self.sprites))
 					self._Map__walls.add(Point(x, y))
 
 				elif raw_map[y][x] == Tiles.car_left or raw_map[y][x] == Tiles.car_down \
@@ -74,7 +79,7 @@ class Map(Frame):
 		return self._Map__cars
 
 	def get_traffic_lights(self) -> set():
-		return self.__traffic_lights
+		return self._Map__traffic_lights
 
 	def get_open_spot(self):
 		return self._Map__open_spot
@@ -95,8 +100,6 @@ class Map(Frame):
 		# If destination is not specified
 		if car.dest is None:
 			return None
-
-		
 
 		# Occupied spaces, or visited vertex
 		stop_signs = {Point(x, y)

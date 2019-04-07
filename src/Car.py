@@ -1,6 +1,6 @@
 import importlib
 from tkinter import Canvas
-from Raw import Point, Tiles
+from Raw import Point, Tiles, raw_map
 
 class Car(Canvas):
     
@@ -13,6 +13,7 @@ class Car(Canvas):
         self.state = state
         self.dest = dest
         self.color = body
+        self.count = 0
         self.__component = []
         if self.state == Tiles.car_left :
             self.draw_car_horizontalLeft()
@@ -29,14 +30,8 @@ class Car(Canvas):
     def __repr__(self):
         return f'Car(x:{self.x}, y:{self.y}, state:{self.state}, master:{self.master}, dest:{self.dest}, color:{self.color})'
 
-    def head(self):
-        x, y = self.x, self.y 
-        if self.state == Tiles.car_left or self.state == Tiles.car_right:
-            yield from [Point(x + self.dx + self.dy, y + self.dy + self.dx), 
-                        Point(x + self.dx + self.dy, y), Point(x + self.dx + self.dy, y - self.dy - self.dx)]
-        else:
-            yield from [Point(x + self.dx + self.dy, y + self.dy + self.dx), 
-                        Point(x, y + self.dx + self.dy), Point(x  - self.dy - self.dx, y + self.dx + self.dy)]
+    def neighbors(self):
+        return {raw_map[pos.y][pos.x] for pos in self.pos.neighbors()}
 
     def update_speed(self):
         if self.state == Tiles.car_down:
@@ -141,4 +136,13 @@ class Car(Canvas):
 
     def stop(self):
         self.dx, self.dy = 0, 0
+
+    def stop_for_three_step(self) -> bool:
+        if self.count == 2:
+            self.count = 0
+            return False
+        else:
+            self.count += 1 
+            self.dx, self.dy = 0, 0
+            return True
     
