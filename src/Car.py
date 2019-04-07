@@ -4,7 +4,7 @@ from Raw import Point, Tiles, raw_map
 
 class Car(Canvas):
     
-    def __init__(self, coordinate : Point, state : Tiles, master=None, dest=None, body='red'):
+    def __init__(self, coordinate : Point, state : Tiles, master=None, dest=None, body='yellow'):
         super().__init__(master)
         self.x = coordinate.x
         self.y = coordinate.y
@@ -16,13 +16,13 @@ class Car(Canvas):
         self.count = 0
         self.__component = []
         if self.state == Tiles.car_left :
-            self.draw_car_horizontalLeft()
+            self.draw_car_horizontal_left()
         elif self.state == Tiles.car_right : 
-            self.draw_car_horizontalRight()
+            self.draw_car_horizontal_right()
         elif self.state == Tiles.car_up:
-            self.draw_car_verticalUp()
+            self.draw_car_vertical_up()
         else: 
-            self.draw_car_verticalDown()
+            self.draw_car_vertical_down()
             
             
         self.update_speed()
@@ -51,25 +51,25 @@ class Car(Canvas):
             for comp in self.__component:
                 self.master.delete(comp)
             self.__component.clear() 
-            self.draw_car_verticalDown()
+            self.draw_car_vertical_down()
         elif self.dx == 0 and self.dy == -1:
             self.state = Tiles.car_up
             for comp in self.__component:
                 self.master.delete(comp)
             self.__component.clear() 
-            self.draw_car_verticalUp()
+            self.draw_car_vertical_up()
         elif self.dx == 1 and self.dy == 0:
             self.state = Tiles.car_right
             for comp in self.__component:
                 self.master.delete(comp)
             self.__component.clear() 
-            self.draw_car_horizontalRight()
+            self.draw_car_horizontal_right()
         else:
             self.state = Tiles.car_left
             for comp in self.__component:
                 self.master.delete(comp)
             self.__component.clear() 
-            self.draw_car_horizontalLeft()
+            self.draw_car_horizontal_left()
 
     def get_component(self):
         return self.__component
@@ -80,7 +80,7 @@ class Car(Canvas):
         self.x += self.dx / 30
         self.y += self.dy / 30
 
-    def draw_car_horizontalRight(self):
+    def draw_car_horizontal_right(self):
         if self.master:
             self.__component.append(self.master.create_rectangle(self.x * 30, self.y * 30, 30 + self.x * 30, 15 + self.y * 30, fill=self.color))
             self.__component.append(self.master.create_rectangle(self.x * 30 + 15, self.y * 30 + 5, 23 + self.x * 30, 10 + self.y * 30, fill="black"))
@@ -91,18 +91,7 @@ class Car(Canvas):
             self.__component.append(self.master.create_rectangle(self.x * 30 + 7, self.y * 30 + 14, 12 + self.x * 30, 17 + self.y * 30, fill="black"))
             self.__component.append(self.master.create_rectangle(self.x * 30 + 22, self.y * 30 + 14, 27 + self.x * 30, 17 + self.y * 30, fill="black"))
 
-    def draw_car_verticalUp(self):
-        if self.master:
-            self.__component.append(self.master.create_rectangle(self.x * 30, self.y * 30, 15 + self.x * 30, 30 + self.y * 30, fill=self.color))
-            self.__component.append(self.master.create_rectangle(self.x * 30 + 5, self.y * 30 + 15, 10 + self.x * 30, 23 + self.y * 30, fill="black"))
-            self.__component.append(self.master.create_rectangle(self.x * 30 - 8, self.y * 30+37, 23 + self.x * 30, 30 + self.y * 30, fill="red"))
-            self.__component.append(self.master.create_arc(self.x * 30 -1, self.y * 30 - 6, 16 + self.x * 30, 17 +self.y * 30, start = 0, extent = 180, outline=self.color, fill=self.color))
-            self.__component.append(self.master.create_rectangle(self.x * 30 - 2, self.y * 30 + 7, 1 + self.x * 30, 12 + self.y * 30, fill="black"))
-            self.__component.append(self.master.create_rectangle(self.x * 30 - 2, self.y * 30 + 22, 1 + self.x * 30, 27 + self.y * 30, fill="black"))
-            self.__component.append(self.master.create_rectangle(self.x * 30 + 14, self.y * 30 + 7, 17 + self.x * 30, 12 + self.y * 30, fill="black"))
-            self.__component.append(self.master.create_rectangle(self.x * 30 + 14, self.y * 30 + 22, 17 + self.x * 30, 27 + self.y * 30, fill="black"))
-            
-    def draw_car_horizontalLeft(self):
+    def draw_car_horizontal_left(self):
         if self.master:
             self.__component.append(self.master.create_rectangle(self.x * 30, self.y * 30, 30 + self.x * 30, 15 + self.y * 30, fill=self.color))
             self.__component.append(self.master.create_rectangle(self.x * 30 + 15, self.y * 30 + 5, 23 + self.x * 30, 10 + self.y * 30, fill="black"))
@@ -113,13 +102,23 @@ class Car(Canvas):
             self.__component.append(self.master.create_rectangle(self.x * 30 + 7, self.y * 30 + 14, 12 + self.x * 30, 17 + self.y * 30, fill="black"))
             self.__component.append(self.master.create_rectangle(self.x * 30 + 22, self.y * 30 + 14, 27 + self.x * 30, 17 + self.y * 30, fill="black"))
 
-
-    def draw_car_verticalDown(self):
+    def draw_car_vertical_up(self):
         if self.master:
             self.__component.append(self.master.create_rectangle(self.x * 30, self.y * 30, 15 + self.x * 30, 30 + self.y * 30, fill=self.color))
             self.__component.append(self.master.create_rectangle(self.x * 30 + 5, self.y * 30 + 15, 10 + self.x * 30, 23 + self.y * 30, fill="black"))
-            self.__component.append(self.master.create_rectangle(self.x * 30 + 25, self.y * 30 -3,self.x * 30 - 8, 4 + self.y * 30, fill="red"))
-            self.__component.append(self.master.create_arc(self.x * 30 + 16.5, self.y * 30 + 37,self.x * 30 -2, self.y * 30+6, start = 180, extent = 180, outline=self.color, fill=self.color))
+            self.__component.append(self.master.create_rectangle(self.x * 30 - 8, self.y * 30 + 37, 23 + self.x * 30, 30 + self.y * 30, fill="red"))
+            self.__component.append(self.master.create_arc(self.x * 30 -1, self.y * 30 - 6, 16 + self.x * 30, 17 +self.y * 30, start = 0, extent = 180, outline=self.color, fill=self.color))
+            self.__component.append(self.master.create_rectangle(self.x * 30 - 2, self.y * 30 + 7, 1 + self.x * 30, 12 + self.y * 30, fill="black"))
+            self.__component.append(self.master.create_rectangle(self.x * 30 - 2, self.y * 30 + 22, 1 + self.x * 30, 27 + self.y * 30, fill="black"))
+            self.__component.append(self.master.create_rectangle(self.x * 30 + 14, self.y * 30 + 7, 17 + self.x * 30, 12 + self.y * 30, fill="black"))
+            self.__component.append(self.master.create_rectangle(self.x * 30 + 14, self.y * 30 + 22, 17 + self.x * 30, 27 + self.y * 30, fill="black"))
+
+    def draw_car_vertical_down(self):
+        if self.master:
+            self.__component.append(self.master.create_rectangle(self.x * 30, self.y * 30, 15 + self.x * 30, 30 + self.y * 30, fill=self.color))
+            self.__component.append(self.master.create_rectangle(self.x * 30 + 5, self.y * 30 + 15, 10 + self.x * 30, 23 + self.y * 30, fill="black"))
+            self.__component.append(self.master.create_rectangle(self.x * 30 + 25, self.y * 30 - 3,self.x * 30 - 8, 4 + self.y * 30, fill="red"))
+            self.__component.append(self.master.create_arc(self.x * 30 + 16.5, self.y * 30 + 37,self.x * 30 -2, self.y * 30 + 6, start = 180, extent = 180, outline=self.color, fill=self.color))
             self.__component.append(self.master.create_rectangle(self.x * 30 - 2, self.y * 30 + 7, 1 + self.x * 30, 12 + self.y * 30, fill="black"))
             self.__component.append(self.master.create_rectangle(self.x * 30 - 2, self.y * 30 + 22, 1 + self.x * 30, 27 + self.y * 30, fill="black"))
             self.__component.append(self.master.create_rectangle(self.x * 30 + 14, self.y * 30 + 7, 17 + self.x * 30, 12 + self.y * 30, fill="black"))
