@@ -3,6 +3,8 @@
 # https://hub.docker.com/r/library/python/tags/
 image: python:latest
 
+stages:
+    - run
 # Change pip's cache directory to be inside the project directory since we can
 # only cache local items.
 variables:
@@ -24,3 +26,11 @@ before_script:
   - virtualenv venv
   - source venv/bin/activate
 
+run:
+    stage: run
+    script:
+        - cd ./src/
+        - echo 'Installing dependencies'
+        - pip install -r requirements.txt
+        - py.test -v --doctest-modules test_simulation_data.py
+    
