@@ -64,11 +64,14 @@ git branch -d branch_to_merge
     - Downloadable content can be found at https://cse.unl.edu/~hvuong/traffic-simulation/
 
 ### Increment 5 : Coding and System Testing
+* RAD (Requirement Analysis Document) version 2.3 added with some updates and modification
+* Test Plan and Test Report added
 * More code, implementations added
 * `pytest` is used as a main frame for testing
 * Modified __Breath First Search (BFS)__ is used to implement car path finding. Algorithm implementation is in `Map.optimal_path()`
 * To run pytest : `py.test -v --doctest-modules test_simulation_data.py `
     - `-v` : A more verbose output
     - `--doctest-modules` : BONUS, flags for doctest in Python
+
 
 
