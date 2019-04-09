@@ -10,7 +10,7 @@ matrix:
       sudo: true
 # command to install dependencies
 install:
-  - pip install -r requirements.txt
+  - pip install -r src/requirements.txt
 # command to run tests
 script:
   - py.test --doctest-modules -v src/test_simulation_data.py
