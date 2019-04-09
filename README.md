@@ -73,5 +73,5 @@ git branch -d branch_to_merge
     - `-v` : A more verbose output
     - `--doctest-modules` : BONUS, flags for doctest in Python
 
-
-
+### Increment 6 : Maintenance
+* 2 bot created : `gitlab-ci` and `travis` to help automate daily program testing and maintenance
