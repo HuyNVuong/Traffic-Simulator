@@ -19,6 +19,8 @@ class Simulation(Tk):
     def create_widgets(self):
         self.command = CommandPallete(self)
         self.traffic_map = Map(self)
+        c = Car(Point(16, 2), Tiles.car_right, master=self.traffic_map.city, dest=Point(27, 2))
+        self.traffic_map.add_car(c)
         # car_tmp = Car(Point(5, 7), Tiles.car_left, master=self.traffic_map.city, dest=Point(27, 14))
         # print(self.traffic_map.optimal_path(car_tmp))
         car_w_path = {}
@@ -38,6 +40,18 @@ class Simulation(Tk):
                     for tl in self.traffic_map.get_traffic_lights():
                         tl.blink()
                 if counter % 30 == 0: 
+                    for sl in self.traffic_map.get_sensor_lights():
+                        found_car = False
+                        for car in car_w_path.keys(): 
+                            print(car.pos, sl.pos, sl.pos.around())
+                            if car.pos in sl.pos.around():
+                                found_car = True 
+                        if found_car:
+                            sl.sl_greenOn() 
+                            sl.sl_redOff() 
+                        else:
+                            sl.sl_greenOff()
+                            sl.sl_redOn()    
                     for car, path in car_w_path.items():              
                         if Tiles.stop_sign in car.neighbors():
                             if car.stop_for_three_step():

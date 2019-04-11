@@ -81,10 +81,14 @@ class Car(Canvas):
         self.y += self.dy / 30
 
     def draw_car_horizontal_right(self):
+        head = [[self.x * 30 + 30, self.y * 30], [self.x * 30 + 38, self.y * 30 + 2],
+                [self.x * 30 + 38, self.y * 30 + 13], [self.x * 30 + 30, self.y * 30 + 15]]
         if self.master:
             self.__component.append(self.master.create_rectangle(self.x * 30, self.y * 30, 30 + self.x * 30, 15 + self.y * 30, fill=self.color))
             self.__component.append(self.master.create_rectangle(self.x * 30 + 15, self.y * 30 + 5, 23 + self.x * 30, 10 + self.y * 30, fill="black"))
-            self.__component.append(self.master.create_arc(self.x * 30 + 20, self.y * 30 + 15, 40 + self.x * 30, self.y * 30, start = 270, extent = 180, outline=self.color, fill=self.color))
+            self.__component.append(self.master.create_polygon(head, outline="black", fill=self.color))
+            self.__component.append(self.master.create_rectangle(self.x * 30 + 35, self.y * 30 + 2, self.x * 30 + 38, self.y * 30 + 13, fill="red"))
+            # self.__component.append(self.master.create_rectangle(self.x * 30 + 34, self.y * 30 + 11, self.x * 30 + 38, self.y * 30 + 15, fill="red"))
             self.__component.append(self.master.create_rectangle(self.x * 30, self.y * 30 - 7, 6 + self.x * 30, 23 + self.y * 30, fill="red"))
             self.__component.append(self.master.create_rectangle(self.x * 30 + 7, self.y * 30 - 2, 12 + self.x * 30, 1 + self.y * 30, fill="black"))
             self.__component.append(self.master.create_rectangle(self.x * 30 + 22, self.y * 30 - 2, 27 + self.x * 30, 1 + self.y * 30, fill="black"))
@@ -144,4 +148,12 @@ class Car(Canvas):
             self.count += 1 
             self.dx, self.dy = 0, 0
             return True
+
+if __name__ == "__main__":
+    from tkinter import Tk
+    root = Tk() 
+    c = Canvas(master=root) 
+    c.pack()
+    sl = Car(Point(1,1), Tiles.car_right, master=c)
+    root.mainloop()
     

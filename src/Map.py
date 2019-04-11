@@ -17,6 +17,7 @@ class Map(Frame):
 	__cars = set()
 	__traffic_lights = set()
 	__walls = set()
+	__sensor_lights = set()
 	__open_spot = {Point(x, y)
 		for y, row in enumerate(raw_map)
 			for x, spot in enumerate(row) if spot == Tiles.road}
@@ -43,21 +44,17 @@ class Map(Frame):
 
 				elif raw_map[y][x] == Tiles.car_left or raw_map[y][x] == Tiles.car_down \
 					or raw_map[y][x] == Tiles.car_right or raw_map[y][x] == Tiles.car_up:
-					color = random.choice(colors)
-					colors.remove(color)
-					car = Car(Point(x, y), raw_map[y][x], self.city, color, body=color)
-					car_dest = random.sample(self._Map__open_spot, 1)[0]
-					self.city.create_arc(car_dest.x * 30 + 1, car_dest.y * 30 + 40, car_dest.x * 30 + 20, car_dest.y * 30, start=0, extent=180, fill=color)
-					self.city.create_text((car_dest.x * 30 + 12, car_dest.y * 30 + 11), text="A", fill="white")
-					self._Map__open_spot.remove(car_dest)
-					car.dest = car_dest
-					self.__cars.add(car)
+						color = random.choice(colors)
+						colors.remove(color)
+						car_dest = random.sample(self._Map__open_spot, 1)[0]
+						car = Car(Point(x, y), raw_map[y][x], master=self.city, dest=car_dest, body=color)
+						self.add_car(car)
 
 				elif raw_map[y][x] == Tiles.stop_sign:
-					MapTiles(Point(x, y), raw_map[y][x], self)
+					MapTiles(Point(x, y), raw_map[y][x], self.city)
 					
 				elif raw_map[y][x] == Tiles.traffic_lights:
-					tl = MapTiles(Point(x, y), raw_map[y][x], self)
+					tl = MapTiles(Point(x, y), raw_map[y][x], self.city)
 					if (raw_map[y][x + 1] == Tiles.road and raw_map[y + 1][x] == Tiles.road) \
 						or (raw_map[y - 1][x] == Tiles.road and raw_map[y][x - 1] == Tiles.road):
 						tl.redOn() 
@@ -65,14 +62,21 @@ class Map(Frame):
 						tl.greenOn()
 					self.__traffic_lights.add(tl)
 		
+				elif raw_map[y][x] == Tiles.sensor_light:
+					sl = MapTiles(Point(x, y), raw_map[y][x], self.city)
+					self._Map__sensor_lights.add(sl)
+
+
 	def draw_block(self, x, y, designated=False):
 		self.city.create_rectangle(x * 30, y * 30, 30 + x * 30, 30 + y * 30, outline="black", fill="#808080")
 
 	def draw_dot(self, x, y):
 		self.city.create_rectangle(x * 30 + 10, y * 30 + 10, x * 30 + 16, y * 30 + 16, fill="#fff")
 
-	def add_car(self, x, y, state):
-		car = Car(Point(x, y), state, self.city)
+	def add_car(self, car):
+		self._Map__open_spot.remove(car.dest)
+		self.city.create_arc(car.dest.x * 30 + 1, car.dest.y * 30 + 40, car.dest.x * 30 + 20, car.dest.y * 30, start=0, extent=180, fill=car.color)
+		self.city.create_text((car.dest.x * 30 + 12, car.dest.y * 30 + 11), text="A", fill="white")
 		self.__cars.add(car)
 
 	def get_cars(self) -> set():
@@ -80,6 +84,9 @@ class Map(Frame):
 
 	def get_traffic_lights(self) -> set():
 		return self._Map__traffic_lights
+
+	def get_sensor_lights(self) -> set():
+		return self._Map__sensor_lights
 
 	def get_open_spot(self):
 		return self._Map__open_spot
@@ -106,7 +113,8 @@ class Map(Frame):
 						for y, row in enumerate(raw_map)
 							for x, spot in enumerate(row) if spot == Tiles.stop_sign}
 
-		off_limits = (self._Map__walls | {t.pos for t in self._Map__traffic_lights} | {c.pos for c in self._Map__cars} | stop_signs)
+		off_limits = (self._Map__walls | {t.pos for t in self._Map__traffic_lights} | \
+						 {c.pos for c in self._Map__cars} | stop_signs | self._Map__sensor_lights)
 		if car.pos in off_limits:
 			off_limits.remove(car.pos)
 		# Fancier way to do this : we stop at the point before the beacon
