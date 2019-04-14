@@ -18,9 +18,10 @@ class Map(Frame):
 	__traffic_lights = set()
 	__walls = set()
 	__sensor_lights = set()
-	__open_spot = {Point(x, y)
-		for y, row in enumerate(raw_map)
-			for x, spot in enumerate(row) if spot == Tiles.road}
+	__open_spots = {Point(x, y)
+					for y, row in enumerate(raw_map)
+						for x, spot in enumerate(row) 
+							if (spot == Tiles.road or spot == Tiles.intersection)}
 
 	def __init__(self, master=None):
 		super().__init__(master, width=900, height=540)
@@ -38,7 +39,7 @@ class Map(Frame):
 		# raw_map = fromCSV('./data/Map01.csv')
 		for y in range(len(raw_map)):
 			for x in range(len(raw_map[y])):
-				if raw_map[y][x] == Tiles.wall:    
+				if raw_map[y][x] == Tiles.wall or raw_map[y][x] == Tiles.intersection:    
 					self.city.create_rectangle(x * 30, y * 30, 20 + x * 30, 20 + y * 30, outline="black", fill=random.choice(self.sprites))
 					self._Map__walls.add(Point(x, y))
 
@@ -46,7 +47,7 @@ class Map(Frame):
 					or raw_map[y][x] == Tiles.car_right or raw_map[y][x] == Tiles.car_up:
 						color = random.choice(colors)
 						colors.remove(color)
-						car_dest = random.sample(self._Map__open_spot, 1)[0]
+						car_dest = random.sample(self._Map__open_spots, 1)[0]
 						car = Car(Point(x, y), raw_map[y][x], master=self.city, dest=car_dest, body=color)
 						self.add_car(car)
 
@@ -74,10 +75,12 @@ class Map(Frame):
 		self.city.create_rectangle(x * 30 + 10, y * 30 + 10, x * 30 + 16, y * 30 + 16, fill="#fff")
 
 	def add_car(self, car):
-		self._Map__open_spot.remove(car.dest)
+		self._Map__open_spots.remove(car.dest)
 		self.city.create_arc(car.dest.x * 30 + 1, car.dest.y * 30 + 40, car.dest.x * 30 + 20, car.dest.y * 30, start=0, extent=180, fill=car.color)
 		self.city.create_text((car.dest.x * 30 + 12, car.dest.y * 30 + 11), text="A", fill="white")
 		self.__cars.add(car)
+		if Point(car.dx, car.dy) in self._Map__open_spots:
+			self._Map__open_spots.remove(Point(car.x, car.y))
 
 	def get_cars(self) -> set():
 		return self._Map__cars
@@ -88,8 +91,8 @@ class Map(Frame):
 	def get_sensor_lights(self) -> set():
 		return self._Map__sensor_lights
 
-	def get_open_spot(self):
-		return self._Map__open_spot
+	def get_open_spots(self):
+		return self._Map__open_spots
 
 	''' 
 	This function returns an {maybe} optimal path of a car from 
@@ -115,14 +118,10 @@ class Map(Frame):
 
 		off_limits = (self._Map__walls | {t.pos for t in self._Map__traffic_lights} | \
 						 {c.pos for c in self._Map__cars} | stop_signs | self._Map__sensor_lights)
+
 		if car.pos in off_limits:
 			off_limits.remove(car.pos)
-		# Fancier way to do this : we stop at the point before the beacon
-		# targets = set() 
-		# if car.dest not in off_limits:
-		# 	targets = {p for p in car.dest.neighbors() if p not in off_limits} 
-		# else:
-		# 	return None
+		
 		if car.dest in off_limits:
 			return None
 
@@ -144,6 +143,7 @@ class Map(Frame):
 				if neig in off_limits:
 					continue
 				heapq.heappush(queue, (distance + 1, path + [neig]))
+		print(result)
 		return result[0]
 
 	

@@ -3,7 +3,7 @@
 from Map import Map
 from Raw import Tiles, raw_map, Point, resource_path
 from Car import Car
-from CommandPallete import CommandPallete
+from Controller import Controller
 from tkinter import Tk, Frame, Label, Button
 from time import sleep
 from PIL import Image, ImageTk
@@ -17,7 +17,7 @@ class Simulation(Tk):
         self.create_widgets()
     
     def create_widgets(self):
-        self.command = CommandPallete(self)
+        self.command = Controller(self)
         self.traffic_map = Map(self)
         c = Car(Point(16, 2), Tiles.car_right, master=self.traffic_map.city, dest=Point(27, 2))
         self.traffic_map.add_car(c)
@@ -26,6 +26,7 @@ class Simulation(Tk):
         car_w_path = {}
         for car in self.traffic_map.get_cars():
             path = self.traffic_map.optimal_path(car)
+            print(car, path)
             car.dx, car.dy = path[1].x - path[0].x, path[1].y - path[0].y
             car.update_state()
             car_w_path[car] = path
@@ -43,7 +44,6 @@ class Simulation(Tk):
                     for sl in self.traffic_map.get_sensor_lights():
                         found_car = False
                         for car in car_w_path.keys(): 
-                            print(car.pos, sl.pos, sl.pos.around())
                             if car.pos in sl.pos.around():
                                 found_car = True 
                         if found_car:
@@ -74,10 +74,6 @@ class Simulation(Tk):
                         else:
                             car.stop()
                 for car in car_w_path.keys():
-                    # for head in car.head():
-                        # print(head, raw_map[int(head.y)][int(head.x)])
-                        # if raw_map[int(head.y)][int(head.x)] == Tiles.stop_sign:
-                        #     car.dx, car.dy = 0, 0
                     for comp in car.get_component():
                         self.traffic_map.city.move(comp, car.dx, car.dy)
                     if counter % 30 == 0:
