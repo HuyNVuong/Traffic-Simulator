@@ -12,6 +12,7 @@ block_colors_0 = ['#498B62', '#369058', '#1FD464', '#137D3B']
 block_colors_1 = ['#C7980A', '#F4651F', '#82D8A7', '#CC3A05', '#575E76', '#156943', '#0BD055', '#ACD338']
 block_colors = [block_colors_0, block_colors_1]
 
+
 class Map(Frame):
 
 	__cars = set()
@@ -39,7 +40,7 @@ class Map(Frame):
 		# raw_map = fromCSV('./data/Map01.csv')
 		for y in range(len(raw_map)):
 			for x in range(len(raw_map[y])):
-				if raw_map[y][x] == Tiles.wall or raw_map[y][x] == Tiles.intersection:    
+				if raw_map[y][x] == Tiles.wall:    
 					self.city.create_rectangle(x * 30, y * 30, 20 + x * 30, 20 + y * 30, outline="black", fill=random.choice(self.sprites))
 					self._Map__walls.add(Point(x, y))
 

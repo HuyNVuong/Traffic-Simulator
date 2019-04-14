@@ -1,7 +1,7 @@
 from Simulation import Simulation
 from tkinter import Tk, Canvas, Frame, Button, Label, filedialog
 from PIL import Image, ImageTk
-from Raw import resource_path
+from Raw import resource_path, raw_data, load_raw_data
 
  # Opening window
 class SimulationMenu(Tk):
@@ -28,13 +28,20 @@ class SimulationMenu(Tk):
         start_button['text'] = 'Open Simulation'
         start_button.grid(row=3, column=3, columnspan=2, padx=300, pady=20)
 
+        row = 4
+        for city_name in raw_data.keys():
+            city_btn = Button(self.img, fg='green', command=lambda:load_raw_data(city_name))
+            city_btn['text'] = city_name
+            city_btn.grid(row=row, column=3, columnspan=2, padx=300, pady=20)
+            row += 1
+
         import_button = Button(self.img, fg='green', command=self.openfile)
         import_button['text'] = 'Import Map'
-        import_button.grid(row=4, column=3, columnspan=2, padx=300, pady=20)
+        import_button.grid(row=row, column=3, columnspan=2, padx=300, pady=20)
 
         creator_button = Button(self.img, fg='blue')
         creator_button['text'] = 'Create a Map'
-        creator_button.grid(row=5, column=3, columnspan=2, padx=300, pady=20)
+        creator_button.grid(row=row, column=3, columnspan=2, padx=300, pady=20)
 
     def openfile(self) -> str:
         # self.withdraw()
