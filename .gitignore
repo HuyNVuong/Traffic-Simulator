@@ -1,4 +1,9 @@
+# Pycache and system files
 *.pyc
 *.cpython*
 .DS_Store
 __pycache__
+
+# Ignoring the directory generated from pyinstaller
+src/dist
+src/build
