@@ -2,8 +2,9 @@ from Simulation import Simulation
 from tkinter import Tk, Canvas, Frame, Button, Label, filedialog
 from PIL import Image, ImageTk
 from Raw import resource_path, raw_data, load_raw_data
+import os 
 
- # Opening window
+# Opening window
 class SimulationMenu(Tk):
     def __init__(self):
         super().__init__()

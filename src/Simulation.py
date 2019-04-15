@@ -26,11 +26,9 @@ class Simulation(Tk):
         car_w_path = {}
         for car in self.traffic_map.get_cars():
             path = self.traffic_map.optimal_path(car)
-            print(car, path)
             car.dx, car.dy = path[1].x - path[0].x, path[1].y - path[0].y
             car.update_state()
             car_w_path[car] = path
-            # print(car, path)
         counter = 0
         while self.command._running is not True:
             self.command.update()
