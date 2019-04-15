@@ -144,7 +144,6 @@ class Map(Frame):
 				if neig in off_limits:
 					continue
 				heapq.heappush(queue, (distance + 1, path + [neig]))
-		print(result)
 		return result[0]
 
 	
