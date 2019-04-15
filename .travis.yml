@@ -10,7 +10,7 @@ matrix:
       sudo: true
 # command to install dependencies
 install:
-  - apt-get python3-tk
+  - apt-get install python3-tk
   - pip install -r src/requirements.txt
 # command to run tests
 script:
