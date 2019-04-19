@@ -20,10 +20,7 @@ class Map(Frame):
 	__walls = set()
 	__sensor_lights = set()
 	__raw_map = []
-	__open_spots = {Point(x, y)
-					for y, row in enumerate(__raw_map)
-						for x, spot in enumerate(row) 
-							if (spot == Tiles.road or spot == Tiles.intersection)}
+	__open_spots = set()
 
 	def __init__(self, master=None):
 		super().__init__(master, width=900, height=540)
@@ -34,9 +31,17 @@ class Map(Frame):
 		self.create_widgets()
 
 	def create_widgets(self):
-		if len(self._Map__raw_map) == 0:
+		if not len(self.__raw_map):
+			print('No map loaded, getting default map')
 			self._Map__raw_map = raw_data['City 1']
+			self._Map__open_spots =  \
+						{Point(x, y)
+							for y, row in enumerate(self._Map__raw_map)
+								for x, spot in enumerate(row) 
+									if (spot == Tiles.road or spot == Tiles.intersection)}
+		print(self._Map__raw_map)
 		self.city = Canvas(self, width=900, height=480)
+		self.city.data = self._Map__raw_map
 		self.paint()
 		self.city.pack()
 
@@ -48,6 +53,13 @@ class Map(Frame):
 					for y, row in enumerate(Map.__raw_map)
 						for x, spot in enumerate(row) 
 							if (spot == Tiles.road or spot == Tiles.intersection)}		
+
+	@staticmethod
+	def get_raw_map() -> List[List[int]]:
+		return Map._Map__raw_map
+
+	# def get_raw_map(self):
+	# 	return self._Map__raw_map
 		
 	def paint(self):
 		# self.self._Map__raw_map = fromCSV('./data/Map01.csv')

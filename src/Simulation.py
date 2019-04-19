@@ -1,7 +1,7 @@
 # Main driver that executes the program
 
 from Map import Map
-from Raw import Tiles, raw_map, Point, resource_path
+from Raw import Tiles, Point, resource_path
 from Car import Car
 from Controller import Controller
 from tkinter import Tk, Frame, Label, Button

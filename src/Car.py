@@ -1,6 +1,5 @@
-import importlib
 from tkinter import Canvas
-from Raw import Point, Tiles, raw_map
+from Raw import Point, Tiles
 
 class Car(Canvas):
     
@@ -23,14 +22,13 @@ class Car(Canvas):
             self.draw_car_vertical_up()
         else: 
             self.draw_car_vertical_down()
-            
-            
         self.update_speed()
 
     def __repr__(self):
         return f'Car(x:{self.x}, y:{self.y}, state:{self.state}, master:{self.master}, dest:{self.dest}, color:{self.color})'
 
     def neighbors(self):
+        raw_map = self.master.data
         return {raw_map[pos.y][pos.x] for pos in self.pos.neighbors()}
 
     def update_speed(self):
