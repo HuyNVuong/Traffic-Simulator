@@ -1,7 +1,7 @@
 from tkinter import Frame, Canvas, Tk
 from typing import List # Optional
 from Car import Car
-from Raw import Point, raw_map, Tiles, fromCSV
+from Raw import Point, Tiles, fromCSV
 from MapTiles import MapTiles
 from enum import Enum
 import heapq
@@ -19,8 +19,9 @@ class Map(Frame):
 	__traffic_lights = set()
 	__walls = set()
 	__sensor_lights = set()
+	__raw_map = []
 	__open_spots = {Point(x, y)
-					for y, row in enumerate(raw_map)
+					for y, row in enumerate(__raw_map)
 						for x, spot in enumerate(row) 
 							if (spot == Tiles.road or spot == Tiles.intersection)}
 
@@ -29,6 +30,7 @@ class Map(Frame):
 		self.master = master 
 		self.pack(side='bottom')
 		self.sprites = random.choice(block_colors)
+		# print(self._Map__raw_map)
 		self.create_widgets()
 
 	def create_widgets(self):
@@ -36,36 +38,45 @@ class Map(Frame):
 		self.paint()
 		self.city.pack()
 
+	@staticmethod
+	def load_raw_data(data : List[List[int]]):
+		Map.__raw_map = data
+		Map.__open_spots = \
+				{Point(x, y)
+					for y, row in enumerate(Map.__raw_map)
+						for x, spot in enumerate(row) 
+							if (spot == Tiles.road or spot == Tiles.intersection)}		
+		
 	def paint(self):
-		# raw_map = fromCSV('./data/Map01.csv')
-		for y in range(len(raw_map)):
-			for x in range(len(raw_map[y])):
-				if raw_map[y][x] == Tiles.wall:    
+		# self.self._Map__raw_map = fromCSV('./data/Map01.csv')
+		for y in range(len(self._Map__raw_map)):
+			for x in range(len(self._Map__raw_map[y])):
+				if self._Map__raw_map[y][x] == Tiles.wall:    
 					self.city.create_rectangle(x * 30, y * 30, 20 + x * 30, 20 + y * 30, outline="black", fill=random.choice(self.sprites))
 					self._Map__walls.add(Point(x, y))
 
-				elif raw_map[y][x] == Tiles.car_left or raw_map[y][x] == Tiles.car_down \
-					or raw_map[y][x] == Tiles.car_right or raw_map[y][x] == Tiles.car_up:
+				elif self._Map__raw_map[y][x] == Tiles.car_left or self._Map__raw_map[y][x] == Tiles.car_down \
+					or self._Map__raw_map[y][x] == Tiles.car_right or self._Map__raw_map[y][x] == Tiles.car_up:
 						color = random.choice(colors)
 						colors.remove(color)
 						car_dest = random.sample(self._Map__open_spots, 1)[0]
-						car = Car(Point(x, y), raw_map[y][x], master=self.city, dest=car_dest, body=color)
+						car = Car(Point(x, y), self._Map__raw_map[y][x], master=self.city, dest=car_dest, body=color)
 						self.add_car(car)
 
-				elif raw_map[y][x] == Tiles.stop_sign:
-					MapTiles(Point(x, y), raw_map[y][x], self.city)
+				elif self._Map__raw_map[y][x] == Tiles.stop_sign:
+					MapTiles(Point(x, y), self._Map__raw_map[y][x], self.city)
 					
-				elif raw_map[y][x] == Tiles.traffic_lights:
-					tl = MapTiles(Point(x, y), raw_map[y][x], self.city)
-					if (raw_map[y][x + 1] == Tiles.road and raw_map[y + 1][x] == Tiles.road) \
-						or (raw_map[y - 1][x] == Tiles.road and raw_map[y][x - 1] == Tiles.road):
+				elif self._Map__raw_map[y][x] == Tiles.traffic_lights:
+					tl = MapTiles(Point(x, y), self._Map__raw_map[y][x], self.city)
+					if (self._Map__raw_map[y][x + 1] == Tiles.road and self._Map__raw_map[y + 1][x] == Tiles.road) \
+						or (self._Map__raw_map[y - 1][x] == Tiles.road and self._Map__raw_map[y][x - 1] == Tiles.road):
 						tl.redOn() 
 					else: 
 						tl.greenOn()
 					self.__traffic_lights.add(tl)
 		
-				elif raw_map[y][x] == Tiles.sensor_light:
-					sl = MapTiles(Point(x, y), raw_map[y][x], self.city)
+				elif self._Map__raw_map[y][x] == Tiles.sensor_light:
+					sl = MapTiles(Point(x, y), self._Map__raw_map[y][x], self.city)
 					self._Map__sensor_lights.add(sl)
 
 
@@ -114,7 +125,7 @@ class Map(Frame):
 
 		# Occupied spaces, or visited vertex
 		stop_signs = {Point(x, y)
-						for y, row in enumerate(raw_map)
+						for y, row in enumerate(self._Map__raw_map)
 							for x, spot in enumerate(row) if spot == Tiles.stop_sign}
 
 		off_limits = (self._Map__walls | {t.pos for t in self._Map__traffic_lights} | \
