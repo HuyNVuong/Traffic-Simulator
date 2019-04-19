@@ -1,9 +1,10 @@
-from Raw import raw_map, Tiles, predef, Point
+from Raw import raw_data, Tiles, predef, Point
 import pytest
 from Car import Car
 from Map import Map
 from MapTiles import MapTiles
 
+raw_map = raw_data['City 1']
 # class SimulationTester():
 def test_raw_map_data():
     '''
