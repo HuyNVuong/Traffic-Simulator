@@ -19,29 +19,29 @@ class SimulationMenu(Tk):
 
         raw = Image.open('./data/traffic-background.jpg')
         render = ImageTk.PhotoImage(raw)
-        self.img = Label(start_frame, image=render, width=850, height=540)
-        self.img.image = render
-        self.img.pack()
+        self.background = Label(start_frame, image=render, width=850, height=540)
+        self.background.image = render
+        self.background.pack()
 
-        start_label = Label(self.img, text='City Traffic Simulation')
+        start_label = Label(self.background, text='City Traffic Simulation')
         start_label.grid(row=2, column=3, columnspan=2, padx=300, pady=20)
 
-        start_button = Button(self.img, fg='red', command=self.destroy)
+        start_button = Button(self.background, fg='red', command=self.destroy)
         start_button['text'] = 'Open Simulation'
         start_button.grid(row=3, column=3, columnspan=2, padx=300, pady=20)
 
         row = 4
-        for city_name, city in raw_data.items():
-            city_btn = Button(self.img, fg='green', text=city_name,
-                        command=lambda:[Map.load_raw_data(city), self.alert_data_loaded(city_name)])
+        for i, city in enumerate(raw_data.keys()):
+            city_btn = Button(self.background, fg='green', text=city,
+                        command=lambda i=i:[Map.load_raw_data(raw_data[city]), self.alert_data_loaded(city)])
             city_btn.grid(row=row, column=3, columnspan=2, padx=300, pady=20)
             row += 1
 
-        import_button = Button(self.img, fg='green', command=self.openfile)
+        import_button = Button(self.background, fg='green', command=self.openfile)
         import_button['text'] = 'Import Map'
         import_button.grid(row=row, column=3, columnspan=2, padx=300, pady=20)
 
-        creator_button = Button(self.img, fg='blue')
+        creator_button = Button(self.background, fg='blue')
         creator_button['text'] = 'Create a Map'
         creator_button.grid(row=row, column=3, columnspan=2, padx=300, pady=20)
 

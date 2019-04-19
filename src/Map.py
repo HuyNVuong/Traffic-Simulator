@@ -1,16 +1,16 @@
 from tkinter import Frame, Canvas, Tk
 from typing import List # Optional
 from Car import Car
-from Raw import Point, Tiles, fromCSV
+from Raw import Point, Tiles, fromCSV, raw_data
 from MapTiles import MapTiles
 from enum import Enum
 import heapq
 import random
 
-colors = ['#C7980A', '#F4651F', '#CC3A05', '#575E76', '#156943', '#0BD055', '#ACD338']
+colors 		   = ['#C7980A', '#F4651F', '#CC3A05', '#575E76', '#156943', '#0BD055', '#ACD338']
 block_colors_0 = ['#498B62', '#369058', '#1FD464', '#137D3B']
 block_colors_1 = ['#C7980A', '#F4651F', '#82D8A7', '#CC3A05', '#575E76', '#156943', '#0BD055', '#ACD338']
-block_colors = [block_colors_0, block_colors_1]
+block_colors   = [block_colors_0, block_colors_1]
 
 
 class Map(Frame):
@@ -34,6 +34,8 @@ class Map(Frame):
 		self.create_widgets()
 
 	def create_widgets(self):
+		if self._Map__raw_map == []:
+			self._Map__raw_map = raw_data['City 1']
 		self.city = Canvas(self, width=900, height=480)
 		self.paint()
 		self.city.pack()
