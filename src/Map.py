@@ -34,7 +34,7 @@ class Map(Frame):
 		self.create_widgets()
 
 	def create_widgets(self):
-		if self._Map__raw_map == []:
+		if len(self._Map__raw_map) == 0:
 			self._Map__raw_map = raw_data['City 1']
 		self.city = Canvas(self, width=900, height=480)
 		self.paint()
