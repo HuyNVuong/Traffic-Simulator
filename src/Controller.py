@@ -63,9 +63,10 @@ class Controller(Frame):
         # self.quit.pack(side="right")
 
     def start(self):
+        if self._ispause is False:
+            self.start_time = time()
         self._ispause = False
         self._running = True
-        self.start_time = time()
         self.start_timing()
         print("Starting project...")
 
