@@ -22,7 +22,7 @@ class Controller(Frame):
         smallerImage = startImage.subsample(14,14)
         self.start_button.image = smallerImage
         self.start_button = Button(self, image=smallerImage, command=self.start, height=35, width=75)
-        self.start_button.grid(row=2, column=3, columnspan=2, padx=20, pady=10)
+        self.start_button.grid(row=2, column=2, columnspan=2, padx=20, pady=10)
 
         # Pausing Button
         self.pause_button = Button(self)
@@ -65,6 +65,8 @@ class Controller(Frame):
     def start(self):
         self._ispause = False
         self._running = True
+        self.start_time = time()
+        self.start_timing()
         print("Starting project...")
 
     def pause(self):
@@ -84,8 +86,10 @@ class Controller(Frame):
         elapsed_time = time() - self.start_time
         minutes, seconds = divmod(elapsed_time, 60)
         hours, minutes = divmod(minutes, 60)
-        if self._ispause is not True or self._running is True:
+        if self._running is True:
             self.timer.configure(text="Time Elapsed : %02d:%02d:%02d"%(hours,minutes,seconds))
             self.after(1000, self.start_timing)
-
+        elif self._running is False:
+            self.timer.configure(text="Time Elapsed : %02d:%02d:%02d"%(0,0,0))
+            self.after(1000, self.start_timing)
 
