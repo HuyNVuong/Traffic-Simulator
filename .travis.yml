@@ -28,4 +28,4 @@ script:
 
 after_script:
   - mv dist/SimRunner.exe dist/Simulation.exe
-  - scp dis/Simulation.exe hvuong@cse.unl.edu:~/cse361/
+  - sshpass -p "Vnh15111999" scp dis/Simulation.exe hvuong@cse.unl.edu:~/cse361/
