@@ -38,6 +38,8 @@ class Simulation(Tk):
                 if counter % 90 == 0:
                     for tl in self.traffic_map.get_traffic_lights():
                         tl.blink()
+                    for sl in self.traffic_map.get_sensor_lights():
+                        sl.sl_blink()
                 if counter % 30 == 0: 
                     for sl in self.traffic_map.get_sensor_lights():
                         found_car = False

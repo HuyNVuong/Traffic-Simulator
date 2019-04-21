@@ -19,6 +19,7 @@ class MapTiles(Canvas):
         self.x = coordinate.x
         self.y = coordinate.y
         self.pos = coordinate
+        self.sl_light = LightT.none
         if state == Tiles.stop_sign:
             self.draw_stop_sign()
         elif state == Tiles.traffic_lights:
@@ -58,6 +59,14 @@ class MapTiles(Canvas):
             self.yellowOn()
             self.greenOff()
 
+    def sl_blink(self):
+        if self.sl_light == LightT.red:
+            self.greenOn()
+            self.redOff()
+        else:
+            self.greenOff()
+            self.redOn()
+
     def redOn(self):
         self.light = LightT.red
         self.master.create_oval(self.x * 30 + 5, self.y * 30 - 3, self.x * 30 + 15, self.y * 30 + 7, fill="red")
@@ -86,12 +95,14 @@ class MapTiles(Canvas):
  
     def sl_redOn(self):
         self.master.create_oval(self.x * 30 + 5, self.y * 30, self.x * 30 + 17, self.y * 30 + 12, fill="red")
+        self.sl_light = LightT.red
 
     def sl_redOff(self):
         self.master.create_oval(self.x * 30 + 5, self.y * 30, self.x * 30 + 17, self.y * 30 + 12, fill="grey")
         
     def sl_greenOn(self):
         self.master.create_oval(self.x * 30 + 5, self.y * 30 + 13, self.x * 30 + 17, self.y * 30 + 25, fill="green")
+        self.sl_light = LightT.green
     
     def sl_greenOff(self):
         self.master.create_oval(self.x * 30 + 5, self.y * 30 + 13, self.x * 30 + 17, self.y * 30 + 25, fill="grey")

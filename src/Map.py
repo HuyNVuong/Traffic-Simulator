@@ -21,6 +21,7 @@ class Map(Frame):
 	__sensor_lights = set()
 	__raw_map = []
 	__open_spots = set()
+	__intersections = set()
 
 	def __init__(self, master=None):
 		super().__init__(master, width=900, height=540)
@@ -90,6 +91,9 @@ class Map(Frame):
 					sl = MapTiles(Point(x, y), self._Map__raw_map[y][x], self.city)
 					self._Map__sensor_lights.add(sl)
 
+				elif self._Map__raw_map[y][x] == Tiles.intersection:
+					self._Map__intersections.add(Point(x, y))
+
 
 	def draw_block(self, x, y, designated=False):
 		self.city.create_rectangle(x * 30, y * 30, 30 + x * 30, 30 + y * 30, outline="black", fill="#808080")
@@ -117,6 +121,8 @@ class Map(Frame):
 	def get_open_spots(self):
 		return self._Map__open_spots
 
+	def get_intersections(self):
+		return self._Map__intersections
 	''' 
 	This function returns an {maybe} optimal path of a car from 
 	point A to point B
