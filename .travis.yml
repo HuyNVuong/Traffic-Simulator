@@ -23,7 +23,7 @@ script:
   - cd src
   - pyinstaller -i data/traffic.ico -F SimRunner.py
   - ls 
-  - sed -i "s/datas=\[\]/datas=\[('\/home\/travis\/build\/HuyNVuong\/Traffic-Simulator\/src\/buttonImages\/*', 'buttonImages'),('\/home\/travis\/build\/HuyNVuong\/Traffic-Simulator\/data\/*', 'data')\]/" SimRunner.spec
+  - sed -i "s/datas=\[\]/datas=\[('\/home\/travis\/build\/HuyNVuong\/Traffic-Simulator\/src\/buttonImages\/*', 'buttonImages'),('\/home\/travis\/build\/HuyNVuong\/Traffic-Simulator\/src\/data\/*', 'data')\]/" SimRunner.spec
   - pyinstaller SimRunner.spec
 
 after_script:
