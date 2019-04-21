@@ -21,6 +21,11 @@ script:
   - py.test --doctest-modules -v src/test_simulation_data.py
   - echo 'Current working directory - ' $(pwd) 
   - cd src
-  - pyinstaller -i src/data/traffic.ico -F src/SimRunner.py
+  - pyinstaller -i data/traffic.ico -F SimRunner.py
   - ls 
   - sed -i "s/datas=\[\]/datas=\['\/home\/travis\/build\/HuyNVuong\/Traffic-Simulator\/src\/buttonImages\/*', 'buttonImages'),('\/home\/travis\/build\/HuyNVuong\/Traffic-Simulator\/data\/*', 'data')\]/" SimRunner.spec
+  - pyinstaller SimRunner.spec
+
+after_script:
+  - mv dist/SimRunner.exe dist/Simulation.exe
+  - scp dis/Simulation.exe hvuong@cse.unl.edu:~/cse361/
