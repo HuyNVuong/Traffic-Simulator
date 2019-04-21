@@ -5,6 +5,12 @@
     - Bryan Chavéz
     - Brian Nguyen
 
+## Getting started
+* Clone down the project
+* Having either [Python 3.6](https://www.python.org/downloads/) or later version on your device
+* Install dependencies : `pip install -r requirements.txt` 
+    - __Note__ : If your device doesn't have built-in Python tkinter, also run the following commnad : `apt-get install python3-tk`
+
 ## Milestone
 ### Increment 1 : Analysis 
 * An initial version of RAD is attached in Requirements directory
