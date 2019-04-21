@@ -17,7 +17,7 @@ class SimulationMenu(Tk):
         start_frame = Frame(self, width=850, height=540)
         start_frame.pack()
 
-        raw = Image.open('./data/traffic-background.jpg')
+        raw = Image.open(resource_path('./data/traffic-background.jpg'))
         render = ImageTk.PhotoImage(raw)
         self.background = Label(start_frame, image=render, width=850, height=540)
         self.background.image = render

@@ -7,6 +7,7 @@ __pycache__
 # Ignoring the directory generated from pyinstaller
 src/dist
 src/build
+src/*.spec
 
 # VS code init launch configurations
 .vscode

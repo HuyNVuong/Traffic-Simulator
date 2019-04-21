@@ -19,3 +19,5 @@ install:
 # command to run tests
 script:
   - py.test --doctest-modules -v src/test_simulation_data.py
+  - echo 'Current working directory - ' $(pwd) 
+  - pyinstaller -i src/data/traffic.ico -F src/SimRunner.py

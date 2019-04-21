@@ -3,12 +3,10 @@
 block_cipher = None
 
 
-a = Analysis(['Simulation.py'],
-             pathex=['C:\\Users\\vuong\\Documents\\CSCE\\cse361\\csce_361\\src'],
+a = Analysis(['SimRunner.py'],
+             pathex=['C:\\Users\\vuong\\Documents\\CSCE\\cse361\\csce_361'],
              binaries=[],
-             datas=[('C:\\Users\\vuong\\Documents\\CSCE\\cse361\\csce_361\\src\\buttonImages\\*.png', 'buttonImages'),
-                    ('C:\\Users\\vuong\\Documents\\CSCE\\cse361\\csce_361\\src\\data\\*', 'data'),
-                    ],
+             datas=[],
              hiddenimports=[],
              hookspath=[],
              runtime_hooks=[],
@@ -17,7 +15,6 @@ a = Analysis(['Simulation.py'],
              win_private_assemblies=False,
              cipher=block_cipher,
              noarchive=False)
-
 pyz = PYZ(a.pure, a.zipped_data,
              cipher=block_cipher)
 exe = EXE(pyz,
@@ -26,10 +23,10 @@ exe = EXE(pyz,
           a.zipfiles,
           a.datas,
           [],
-          name='Simulation',
+          name='SimRunner',
           debug=False,
           bootloader_ignore_signals=False,
           strip=False,
           upx=True,
           runtime_tmpdir=None,
-          console=True , icon='data\\traffic.ico')
+          console=True )
