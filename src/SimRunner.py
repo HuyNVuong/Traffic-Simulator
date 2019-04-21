@@ -31,9 +31,9 @@ class SimulationMenu(Tk):
         start_button.grid(row=3, column=3, columnspan=2, padx=300, pady=20)
 
         row = 4
-        for i, city in enumerate(raw_data.keys()):
+        for city in raw_data.keys():
             city_btn = Button(self.background, fg='green', text=city,
-                        command=lambda i=i:[Map.load_raw_data(raw_data[city]), self.alert_data_loaded(city)])
+                        command=lambda city=city:[Map.load_raw_data(raw_data[city]), self.alert_which(city)])
             city_btn.grid(row=row, column=3, columnspan=2, padx=300, pady=20)
             row += 1
 
@@ -45,7 +45,7 @@ class SimulationMenu(Tk):
         creator_button['text'] = 'Create a Map'
         creator_button.grid(row=row, column=3, columnspan=2, padx=300, pady=20)
 
-    def alert_data_loaded(self, city_name):
+    def alert_which(self, city_name):
         self.title(f'{city_name} loaded !')
 
     def openfile(self) -> str:

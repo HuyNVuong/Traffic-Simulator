@@ -57,9 +57,6 @@ class Map(Frame):
 	@staticmethod
 	def get_raw_map() -> List[List[int]]:
 		return Map._Map__raw_map
-
-	# def get_raw_map(self):
-	# 	return self._Map__raw_map
 		
 	def paint(self):
 		# self.self._Map__raw_map = fromCSV('./data/Map01.csv')

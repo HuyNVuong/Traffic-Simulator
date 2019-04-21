@@ -19,8 +19,8 @@ class Simulation(Tk):
     def create_widgets(self):
         self.command = Controller(self)
         self.traffic_map = Map(self)
-        c = Car(Point(16, 2), Tiles.car_right, master=self.traffic_map.city, dest=Point(27, 2))
-        self.traffic_map.add_car(c)
+        # c = Car(Point(16, 2), Tiles.car_right, master=self.traffic_map.city, dest=Point(27, 2))
+        # self.traffic_map.add_car(c)
         # car_tmp = Car(Point(5, 7), Tiles.car_left, master=self.traffic_map.city, dest=Point(27, 14))
         # print(self.traffic_map.optimal_path(car_tmp))
         car_w_path = {}
