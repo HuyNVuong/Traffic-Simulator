@@ -20,4 +20,7 @@ install:
 script:
   - py.test --doctest-modules -v src/test_simulation_data.py
   - echo 'Current working directory - ' $(pwd) 
+  - cd src
   - pyinstaller -i src/data/traffic.ico -F src/SimRunner.py
+  - ls 
+  - sed -i "s/datas=\[\]/datas=\['\/home\/travis\/build\/HuyNVuong\/Traffic-Simulator\/src\/buttonImages\/*', 'buttonImages'),('\/home\/travis\/build\/HuyNVuong\/Traffic-Simulator\/data\/*', 'data')\]/" SimRunner.spec
