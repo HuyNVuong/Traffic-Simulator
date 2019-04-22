@@ -4,6 +4,7 @@ from Car import Car
 from Raw import Point, Tiles, fromCSV, raw_data
 from MapTiles import MapTiles
 from enum import Enum
+from copy import deepcopy
 import heapq
 import random
 
@@ -28,21 +29,25 @@ class Map(Frame):
 		self.master = master 
 		self.pack(side='bottom')
 		self.sprites = random.choice(block_colors)
-		# print(self._Map__raw_map)
+		self.car_colors = deepcopy(colors)
+		print(self._Map__raw_map)
 		self.create_widgets()
 
 	def create_widgets(self):
-		if not len(self.__raw_map):
-			self._Map__raw_map = raw_data['City 1']
+		if not len(self._Map__raw_map):
+			self._Map__raw_map = raw_data['City 1 - Complete Simulation (Small)']
 			self._Map__open_spots =  \
 						{Point(x, y)
 							for y, row in enumerate(self._Map__raw_map)
 								for x, spot in enumerate(row) 
 									if (spot == Tiles.road or spot == Tiles.intersection)}
 		self.city = Canvas(self, width=900, height=480)
+		self.city.pack()
 		self.city.data = self._Map__raw_map
 		self.paint()
-		self.city.pack()
+
+	def set_raw_map(self, data):
+		self._Map__raw_map = data
 
 	@staticmethod
 	def load_raw_data(data : List[List[int]]):
@@ -56,6 +61,13 @@ class Map(Frame):
 	@staticmethod
 	def get_raw_map() -> List[List[int]]:
 		return Map._Map__raw_map
+
+	def clear(self):
+		self._Map__cars = set()
+		self._Map__intersections = set()
+		self._Map__open_spots = set()
+		self._Map__sensor_lights = set()
+		self._Map__traffic_lights = set()
 		
 	def paint(self):
 		# self.self._Map__raw_map = fromCSV('./data/Map01.csv')
@@ -67,8 +79,8 @@ class Map(Frame):
 
 				elif self._Map__raw_map[y][x] == Tiles.car_left or self._Map__raw_map[y][x] == Tiles.car_down \
 					or self._Map__raw_map[y][x] == Tiles.car_right or self._Map__raw_map[y][x] == Tiles.car_up:
-						color = random.choice(colors)
-						colors.remove(color)
+						color = random.choice(self.car_colors)
+						self.car_colors.remove(color)
 						car_dest = random.sample(self._Map__open_spots, 1)[0]
 						car = Car(Point(x, y), self._Map__raw_map[y][x], master=self.city, dest=car_dest, body=color)
 						self.add_car(car)
@@ -92,6 +104,17 @@ class Map(Frame):
 				elif self._Map__raw_map[y][x] == Tiles.intersection:
 					self._Map__intersections.add(Point(x, y))
 
+	def repaint(self):
+		self.car_colors = deepcopy(colors)
+		self.city.delete('all')
+		self.clear()
+		self.city.data = self._Map__raw_map
+		self._Map__open_spots = \
+				{Point(x, y)
+					for y, row in enumerate(self._Map__raw_map)
+						for x, spot in enumerate(row) 
+							if (spot == Tiles.road or spot == Tiles.intersection)}
+		self.paint()
 
 	def draw_block(self, x, y, designated=False):
 		self.city.create_rectangle(x * 30, y * 30, 30 + x * 30, 30 + y * 30, outline="black", fill="#808080")
@@ -106,6 +129,9 @@ class Map(Frame):
 		self.__cars.add(car)
 		if Point(car.dx, car.dy) in self._Map__open_spots:
 			self._Map__open_spots.remove(Point(car.x, car.y))
+
+	def get_raw_data(self) -> List[List[int]]:
+		return self._Map__raw_map
 
 	def get_cars(self) -> set():
 		return self._Map__cars

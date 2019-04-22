@@ -3,6 +3,7 @@ from time import time
 from Map import Map
 from Raw import resource_path
 
+
 class Controller(Frame):
     
     def __init__(self, master=None):
@@ -67,20 +68,25 @@ class Controller(Frame):
             self.start_time = time()
         self._ispause = False
         self._running = True
+        self._reset = False
         self.start_timing()
         print("Starting project...")
 
     def pause(self):
         self._ispause = True
+        self._reset = False
         print("Paused.")
 
     def stop(self):
         self._running = False
         self._ispause = True
+        self._reset = False
         print("Stopped.")
 
     def reset(self):
-        self._reset = True 
+        self._ispause = True
+        self._reset = True
+        print("Resetting...") 
 
     def start_timing(self):
         # your code
