@@ -30,7 +30,7 @@ script:
   - pyinstaller SimRunner.spec
   - ls dist/ 
   - mv dist/SimRunner dist/Simulation
-  - ls dist/
-  - sshpass -p Vnh15111999 scp dist/Simulation hvuong@cse.unl.edu:~/cse361/
+  - cd dist/
+  - sshpass -p Vnh15111999 scp -r Simulation hvuong@cse.unl.edu:~/public_html/traffic-simulation
 
   
