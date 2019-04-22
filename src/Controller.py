@@ -93,7 +93,7 @@ class Controller(Frame):
         elapsed_time = time() - self.start_time
         minutes, seconds = divmod(elapsed_time, 60)
         hours, minutes = divmod(minutes, 60)
-        if self._running is True:
+        if self._running is True and self._ispause is False:
             self.timer.configure(text="Time Elapsed : %02d:%02d:%02d"%(hours,minutes,seconds))
             self.after(1000, self.start_timing)
         elif self._running is False:
