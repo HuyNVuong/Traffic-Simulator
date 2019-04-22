@@ -45,6 +45,7 @@ class Map(Frame):
 		self.city.pack()
 		self.city.data = self._Map__raw_map
 		self.paint()
+		self.car_w_path = self.calculate_optimal_path()
 
 	def set_raw_map(self, data):
 		self._Map__raw_map = data
@@ -63,6 +64,7 @@ class Map(Frame):
 		return Map._Map__raw_map
 
 	def clear(self):
+		self._Map__walls = set()
 		self._Map__cars = set()
 		self._Map__intersections = set()
 		self._Map__open_spots = set()
@@ -106,8 +108,9 @@ class Map(Frame):
 
 	def repaint(self):
 		self.car_colors = deepcopy(colors)
-		self.city.delete('all')
 		self.clear()
+		self.city.delete('all')
+		
 		self.city.data = self._Map__raw_map
 		self._Map__open_spots = \
 				{Point(x, y)
@@ -115,6 +118,7 @@ class Map(Frame):
 						for x, spot in enumerate(row) 
 							if (spot == Tiles.road or spot == Tiles.intersection)}
 		self.paint()
+		self.car_w_path = self.calculate_optimal_path()
 
 	def draw_block(self, x, y, designated=False):
 		self.city.create_rectangle(x * 30, y * 30, 30 + x * 30, 30 + y * 30, outline="black", fill="#808080")
@@ -171,7 +175,7 @@ class Map(Frame):
 
 		off_limits = (self._Map__walls | {t.pos for t in self._Map__traffic_lights} | \
 						 {c.pos for c in self._Map__cars} | stop_signs | self._Map__sensor_lights)
-
+						 
 		if car.pos in off_limits:
 			off_limits.remove(car.pos)
 		
@@ -198,8 +202,15 @@ class Map(Frame):
 				heapq.heappush(queue, (distance + 1, path + [neig]))
 		return result[0]
 
-	
+	def calculate_optimal_path(self):
+		car_w_path = {}
+		for car in self._Map__cars:
+			path = self.optimal_path(car)
+			car_w_path[car] = path  
+		return car_w_path
 
+
+	
 	
 
 

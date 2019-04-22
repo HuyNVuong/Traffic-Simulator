@@ -13,6 +13,7 @@ class Car(Canvas):
         self.dest = dest
         self.color = body
         self.count = 0
+        print(self.pos)
         self.__component = []
         if self.state == Tiles.car_left :
             self.draw_car_horizontal_left()
@@ -29,6 +30,7 @@ class Car(Canvas):
 
     def neighbors(self):
         raw_map = self.master.data
+        
         return {raw_map[pos.y][pos.x] for pos in self.pos.neighbors()}
 
     def update_speed(self):

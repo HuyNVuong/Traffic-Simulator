@@ -92,13 +92,10 @@ class Simulation(Tk):
     def create_widgets(self):
         self.command = Controller(self)
         self.traffic_map = Map(self)
-        # self.begin_map = self.traffic_map
-        car_w_path = {}
-        for car in self.traffic_map.get_cars():
-            path = self.traffic_map.optimal_path(car)
+        for car, path in self.traffic_map.car_w_path.items():
             car.dx, car.dy = path[1].x - path[0].x, path[1].y - path[0].y
             car.update_state()
-            car_w_path[car] = path
+
         counter = 0
         reset = 1
         while True:
@@ -107,17 +104,11 @@ class Simulation(Tk):
                 self.update()
                 if self.command._reset is True:
                     self.traffic_map.repaint()
-                    #self.command.update()
-                    #self.traffic_map.update()
-                    #self.update()
                     self.command._reset = False
                     reset = 1
             while self.command._running is True:
                 if self.command._reset is True:
-                    self.traffic_map.repaint()
-                    # self.command.update()
-                    # self.traffic_map.update()
-                    # self.update()
+                    self.traffic_map.repaint()     
                     self.command._reset = False
                     reset = 1
                 if self.command._ispause is not True and reset == 1:
@@ -129,7 +120,7 @@ class Simulation(Tk):
                     if counter % 30 == 0: 
                         for sl in self.traffic_map.get_sensor_lights():
                             found_car = False
-                            for car in car_w_path.keys(): 
+                            for car in self.traffic_map.car_w_path.keys(): 
                                 if car.pos in sl.pos.around():
                                     found_car = True 
                             if found_car:
@@ -138,7 +129,7 @@ class Simulation(Tk):
                             else:
                                 sl.sl_greenOff()
                                 sl.sl_redOn()    
-                        for car, path in car_w_path.items():              
+                        for car, path in self.traffic_map.car_w_path.items():              
                             if Tiles.stop_sign in car.neighbors():
                                 if car.stop_for_three_step():
                                     continue
@@ -159,7 +150,7 @@ class Simulation(Tk):
                                 path.pop(0)
                             else:
                                 car.stop()
-                    for car in car_w_path.keys():
+                    for car in self.traffic_map.car_w_path.keys():
                         for comp in car.get_component():
                             self.traffic_map.city.move(comp, car.dx, car.dy)
                         if counter % 30 == 0:
