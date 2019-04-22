@@ -164,7 +164,7 @@ class Simulation(Tk):
         display.grid(row=1, column=1, columnspan=2, padx=10, pady=20)
         for car in self.traffic_map.get_cars():
             row += 1
-            car_label = Label(window, text=f'Car {row - 1}: Pos - {car.pos}, Dest - ')
+            car_label = Label(window, text=f'Car {row - 1}: Pos - {car.dest.pos}, Dest - ')
             car_label.grid(row=row, column=1, columnspan=2, padx=10, pady=20)
             x = StringVar()
             x.set(f'{car.x}')
