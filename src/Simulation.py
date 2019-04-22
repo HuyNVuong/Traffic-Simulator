@@ -40,7 +40,7 @@ class SimulationMenu(Toplevel):
         row = 4
         for city in raw_data.keys():
             city_btn = Button(self.background, fg='green', text=city,
-                        command=lambda city=city:[Map.load_raw_data(raw_data[city]), self.alert_which(city)])
+                        command=lambda city=city:[self.master.load_raw_data(raw_data[city]), self.alert_which(city)])
             city_btn.grid(row=row, column=3, columnspan=2, padx=300, pady=20)
             row += 1
 
@@ -156,6 +156,10 @@ class Simulation(Tk):
             self.command.update()
             self.traffic_map.update()
             self.update()
+
+    def load_raw_data(self, data):
+        self.traffic_map.set_raw_map(data)
+        self.traffic_map.repaint()
 
     def edit_car_pos(self):
         window = Toplevel(self)
