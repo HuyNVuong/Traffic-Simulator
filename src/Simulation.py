@@ -92,7 +92,7 @@ class Simulation(Tk):
     def create_widgets(self):
         self.command = Controller(self)
         self.traffic_map = Map(self)
-        self.begin_map = self.traffic_map
+        # self.begin_map = self.traffic_map
         car_w_path = {}
         for car in self.traffic_map.get_cars():
             path = self.traffic_map.optimal_path(car)
@@ -106,17 +106,19 @@ class Simulation(Tk):
                 self.command.update()
                 self.update()
                 if self.command._reset is True:
-                    self.traffic_map = self.begin_map
-                    self.command.update()
-                    self.traffic_map.update()
-                    self.update()
+                    self.traffic_map.repaint()
+                    #self.command.update()
+                    #self.traffic_map.update()
+                    #self.update()
+                    self.command._reset = False
                     reset = 1
             while self.command._running is True:
                 if self.command._reset is True:
-                    self.traffic_map = self.begin_map
-                    self.command.update()
-                    self.traffic_map.update()
-                    self.update()
+                    self.traffic_map.repaint()
+                    # self.command.update()
+                    # self.traffic_map.update()
+                    # self.update()
+                    self.command._reset = False
                     reset = 1
                 if self.command._ispause is not True and reset == 1:
                     if counter % 90 == 0:
@@ -175,10 +177,11 @@ class Simulation(Tk):
                 self.command.update()
                 self.update()
                 if self.command._reset is True:
-                    self.traffic_map = self.begin_map
-                    self.command.update()
-                    self.traffic_map.update()
-                    self.update()
+                    self.traffic_map.repaint()
+                    #self.command.update()
+                    #self.traffic_map.update()
+                    #self.update()
+                    self.command._reset = False
                     reset = 1
 
 
