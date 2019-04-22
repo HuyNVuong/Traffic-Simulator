@@ -25,8 +25,8 @@ script:
   - ls 
   - sed -i "s/datas=\[\]/datas=\[('\/home\/travis\/build\/HuyNVuong\/Traffic-Simulator\/src\/buttonImages\/*', 'buttonImages'),('\/home\/travis\/build\/HuyNVuong\/Traffic-Simulator\/src\/data\/*', 'data')\]/" SimRunner.spec
   - pyinstaller SimRunner.spec
-
-after_script:
-  - ls
+  - ls dist/ 
   - mv dist/SimRunner dist/Simulation
   - sshpass -p "Vnh15111999" scp dist/Simulation hvuong@cse.unl.edu:~/cse361/
+
+  
