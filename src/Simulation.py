@@ -87,7 +87,7 @@ class Simulation(Tk):
         # Edit Menu, used for edting cars and mores
         edit_menu = Menu(self.menu)
         self.menu.add_cascade(label='Edit', menu=edit_menu)
-        edit_menu.add_command(label='Edit Car Position')
+        edit_menu.add_command(label='Edit Car Position', command=self.edit_car_pos)
         edit_menu.add_command(label='Edit Car Destination', command=self.edit_car_dest)
 
     def create_widgets(self):
@@ -157,14 +157,14 @@ class Simulation(Tk):
             self.traffic_map.update()
             self.update()
 
-    def edit_car_dest(self):
+    def edit_car_pos(self):
         window = Toplevel(self)
-        display = Label(window, text='Edit Car Destination')
+        display = Label(window, text='Edit Car Position')
         row = 1
         display.grid(row=1, column=1, columnspan=2, padx=10, pady=20)
         for car in self.traffic_map.get_cars():
             row += 1
-            car_label = Label(window, text=f'Car {row - 1}: Pos - {car.dest.pos}, Dest - ')
+            car_label = Label(window, text=f'Car {row - 1}: Pos -')
             car_label.grid(row=row, column=1, columnspan=2, padx=10, pady=20)
             x = StringVar()
             x.set(f'{car.x}')
@@ -178,6 +178,33 @@ class Simulation(Tk):
             y_label.grid(row=row, column=5, padx=5, pady=20)
             y_edit = Entry(window, textvariable=y)
             y_edit.grid(row=row, column=6, padx=10, pady=20)
+        ok_btn = Button(window, text='OK')
+        ok_btn.grid(row=row + 1, column=6, padx=10, pady=20)
+
+
+    def edit_car_dest(self):
+        window = Toplevel(self)
+        display = Label(window, text='Edit Car Destination')
+        row = 1
+        display.grid(row=1, column=1, columnspan=2, padx=10, pady=20)
+        for car in self.traffic_map.get_cars():
+            row += 1
+            car_label = Label(window, text=f'Car {row - 1}: Pos - {car.dest}, Dest - ')
+            car_label.grid(row=row, column=1, columnspan=2, padx=10, pady=20)
+            x = StringVar()
+            x.set(f'{car.dest.x}')
+            x_label = Label(window, text='x : ')
+            x_label.grid(row=row, column=3, padx=5, pady=20)
+            x_edit = Entry(window, textvariable=x)
+            x_edit.grid(row=row, column=4, padx=10, pady=20)
+            y = StringVar()
+            y.set(f'{car.dest.y}')
+            y_label = Label(window, text='y : ')
+            y_label.grid(row=row, column=5, padx=5, pady=20)
+            y_edit = Entry(window, textvariable=y)
+            y_edit.grid(row=row, column=6, padx=10, pady=20)
+        ok_btn = Button(window, text='OK')
+        ok_btn.grid(row=row + 1, column=6, padx=10, pady=20)
 
         
 
