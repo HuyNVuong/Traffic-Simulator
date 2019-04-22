@@ -33,14 +33,12 @@ class Map(Frame):
 
 	def create_widgets(self):
 		if not len(self.__raw_map):
-			print('No map loaded, getting default map')
 			self._Map__raw_map = raw_data['City 1']
 			self._Map__open_spots =  \
 						{Point(x, y)
 							for y, row in enumerate(self._Map__raw_map)
 								for x, spot in enumerate(row) 
 									if (spot == Tiles.road or spot == Tiles.intersection)}
-		print(self._Map__raw_map)
 		self.city = Canvas(self, width=900, height=480)
 		self.city.data = self._Map__raw_map
 		self.paint()
