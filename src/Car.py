@@ -13,7 +13,6 @@ class Car(Canvas):
         self.dest = dest
         self.color = body
         self.count = 0
-        print(self.pos)
         self.__component = []
         if self.state == Tiles.car_left :
             self.draw_car_horizontal_left()
@@ -93,19 +92,6 @@ class Car(Canvas):
 
 
     def draw_car_horizontal_right(self):
-        # head = [[self.x * 30 + 30, self.y * 30], [self.x * 30 + 38, self.y * 30 + 2],
-        #         [self.x * 30 + 38, self.y * 30 + 13], [self.x * 30 + 30, self.y * 30 + 15]]
-        # if self.master:
-        #     self.__component.append(self.master.create_rectangle(self.x * 30, self.y * 30, 30 + self.x * 30, 15 + self.y * 30, fill=self.color))
-        #     self.__component.append(self.master.create_rectangle(self.x * 30 + 15, self.y * 30 + 5, 23 + self.x * 30, 10 + self.y * 30, fill="black"))
-        #     self.__component.append(self.master.create_polygon(head, outline="black", fill=self.color))
-        #     self.__component.append(self.master.create_rectangle(self.x * 30 + 35, self.y * 30 + 2, self.x * 30 + 38, self.y * 30 + 13, fill="red"))
-        #     # self.__component.append(self.master.create_rectangle(self.x * 30 + 34, self.y * 30 + 11, self.x * 30 + 38, self.y * 30 + 15, fill="red"))
-        #     self.__component.append(self.master.create_rectangle(self.x * 30, self.y * 30 - 7, 6 + self.x * 30, 23 + self.y * 30, fill="red"))
-        #     self.__component.append(self.master.create_rectangle(self.x * 30 + 7, self.y * 30 - 2, 12 + self.x * 30, 1 + self.y * 30, fill="black"))
-        #     self.__component.append(self.master.create_rectangle(self.x * 30 + 22, self.y * 30 - 2, 27 + self.x * 30, 1 + self.y * 30, fill="black"))
-        #     self.__component.append(self.master.create_rectangle(self.x * 30 + 7, self.y * 30 + 14, 12 + self.x * 30, 17 + self.y * 30, fill="black"))
-        #     self.__component.append(self.master.create_rectangle(self.x * 30 + 22, self.y * 30 + 14, 27 + self.x * 30, 17 + self.y * 30, fill="black"))
         if self.master:
            self.__component.append(self.master.create_rectangle(self.x * 30, self.y * 30, 30 + self.x * 30, 15 + self.y * 30, fill=self.color))
            self.__component.append(self.master.create_rectangle(self.x * 30 + 15, self.y * 30 + 5, 23 + self.x * 30, 10 + self.y * 30, fill="black"))

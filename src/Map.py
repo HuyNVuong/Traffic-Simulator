@@ -30,7 +30,6 @@ class Map(Frame):
 		self.pack(side='bottom')
 		self.sprites = random.choice(block_colors)
 		self.car_colors = deepcopy(colors)
-		print(self._Map__raw_map)
 		self.create_widgets()
 
 	def create_widgets(self):

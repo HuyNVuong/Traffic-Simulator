@@ -18,8 +18,7 @@ class SimulationMenu(Toplevel):
         self.title('Menu')
         self.iconbitmap(resource_path('./data/traffic.ico'))
         self.create_widgets()
-        
-        
+          
     def create_widgets(self):
         start_frame = Frame(self, width=850, height=540)
         start_frame.pack()
@@ -95,7 +94,6 @@ class Simulation(Tk):
         for car, path in self.traffic_map.car_w_path.items():
             car.dx, car.dy = path[1].x - path[0].x, path[1].y - path[0].y
             car.update_state()
-
         counter = 0
         reset = 1
         while True:
@@ -136,9 +134,7 @@ class Simulation(Tk):
                             update = True
                             for tl in self.traffic_map.get_traffic_lights():
                                 if tl.pos in car.pos.neighbors():
-                                    # print(tl.pos, car.pos.neighbors(), tl.light)
                                     if tl.light == LightT.red: # LightT.red 
-                                        # print('Red')
                                         car.dx, car.dy = 0, 0
                                         update = False
                                         break
@@ -169,12 +165,8 @@ class Simulation(Tk):
                 self.update()
                 if self.command._reset is True:
                     self.traffic_map.repaint()
-                    #self.command.update()
-                    #self.traffic_map.update()
-                    #self.update()
                     self.command._reset = False
                     reset = 1
-
 
     def load_raw_data(self, data):
         self.traffic_map.set_raw_map(data)
@@ -185,6 +177,8 @@ class Simulation(Tk):
         display = Label(window, text='Edit Car Position')
         row = 1
         display.grid(row=1, column=1, columnspan=2, padx=10, pady=20)
+        new_set = {}
+        original_set = {}
         for car in self.traffic_map.get_cars():
             row += 1
             car_label = Label(window, text=f'Car {row - 1}: Pos -')
@@ -201,7 +195,9 @@ class Simulation(Tk):
             y_label.grid(row=row, column=5, padx=5, pady=20)
             y_edit = Entry(window, textvariable=y)
             y_edit.grid(row=row, column=6, padx=10, pady=20)
-        ok_btn = Button(window, text='OK')
+            new_set[car] = (x, y)
+            original_set[car] = (car.x, car.y)
+        ok_btn = Button(window, text='OK', command=lambda:[self.set_new_pos(new_set, original_set), window.destroy()])
         ok_btn.grid(row=row + 1, column=6, padx=10, pady=20)
 
 
@@ -210,6 +206,8 @@ class Simulation(Tk):
         display = Label(window, text='Edit Car Destination')
         row = 1
         display.grid(row=1, column=1, columnspan=2, padx=10, pady=20)
+        new_set = {}
+        original_set = {}
         for car in self.traffic_map.get_cars():
             row += 1
             car_label = Label(window, text=f'Car {row - 1}: Pos - {car.dest}, Dest - ')
@@ -226,10 +224,28 @@ class Simulation(Tk):
             y_label.grid(row=row, column=5, padx=5, pady=20)
             y_edit = Entry(window, textvariable=y)
             y_edit.grid(row=row, column=6, padx=10, pady=20)
-        ok_btn = Button(window, text='OK')
+            new_set[car] = (x, y)
+            original_set[car] = (car.dest.x, car.dest.y)
+
+        ok_btn = Button(window, text='OK', command=lambda:[self.set_new_dest(new_set, original_set), window.destroy()])
         ok_btn.grid(row=row + 1, column=6, padx=10, pady=20)
 
-        
+    def set_new_post(self, new_set, original_set):
+        for car in new_set.keys():
+            x, y = new_set[car]
+            new_x, new_y = x.get(), y.get()
+            old_x, old_y = original_set[car]
+            if new_x != old_x or new_y != old_y:
+                car.x, car.y = new_x, new_y 
+                car.pos = Point(x, y)
+
+    def set_new_dest(self, new_set, original_set):    
+        for car in new_set.keys():
+            x, y = new_set[car]
+            new_x, new_y = x.get(), y.get()
+            old_x, old_y = original_set[car]
+            if new_x != old_x or new_y != old_y:
+                car.dest.x, car.dest.y = new_x, new_y 
 
     def open_menu(self):
         self.withdraw()
