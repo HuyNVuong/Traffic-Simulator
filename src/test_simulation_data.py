@@ -4,7 +4,7 @@ from Car import Car
 from Map import Map
 from MapTiles import MapTiles
 
-raw_map = raw_data['City 1']
+raw_map = raw_data['City 1 - Complete Simulation (Small)']
 # class SimulationTester():
 def test_raw_map_data():
     '''
