@@ -31,6 +31,5 @@ script:
   - ls dist/ 
   - mv dist/SimRunner dist/Simulation
   - cd dist/
-  - sshpass -p Vnh15111999 scp -r Simulation hvuong@cse.unl.edu:~/public_html/traffic-simulation
 
   
